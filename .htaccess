@@ -1,0 +1,5 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteRule ^$ Back-end/ [L]
+    RewriteRule (.*) Back-end/?url=$1 [L]
+</IfModule>
