@@ -1,76 +1,139 @@
-<script setup>
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
-</script>
-
-<!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <Disclosure as="nav" class="bg-white shadow" v-slot="{ open }">
-    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-      <div class="relative flex h-16 justify-between">
-        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-          <!-- Mobile menu button -->
-          <DisclosureButton class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-            <span class="sr-only">Open main menu</span>
-            <Bars3Icon v-if="!open" class="block h-6 w-6" aria-hidden="true" />
-            <XMarkIcon v-else class="block h-6 w-6" aria-hidden="true" />
-          </DisclosureButton>
+  <header>
+    <Popover class="relative bg-white">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-6 sm:px-6 md:justify-start md:space-x-10 lg:px-8">
+        <div class="flex justify-start lg:w-0 lg:flex-1">
+          <a href="#">
+            <span class="sr-only">Your Company</span>
+            <img class="h-8 w-auto sm:h-10" src="../assets/CinNostalgia_logo.svg" alt="" />
+          </a>
         </div>
-        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-          <div class="flex flex-shrink-0 items-center">
-            <img class="block h-8 w-auto lg:hidden" src="../assets/CinNostalgia_logo.svg" alt="Your Company" />
-            <img class="hidden h-8 w-auto lg:block" src="../assets/CinNostalgia_logo.svg" alt="Your Company" />
-          </div>
-          <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-            <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
-            <a href="#" class="inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900">Dashboard</a>
-            <a href="#" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Team</a>
-            <a href="#" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Projects</a>
-            <a href="#" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Calendar</a>
-          </div>
+        <div class="-my-2 -mr-2 md:hidden">
+          <PopoverButton class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+            <span class="sr-only">Open menu</span>
+            <Bars3Icon class="h-6 w-6" aria-hidden="true" />
+          </PopoverButton>
         </div>
-        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-          <button type="button" class="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-            <span class="sr-only">View notifications</span>
-            <BellIcon class="h-6 w-6" aria-hidden="true" />
-          </button>
+        <PopoverGroup as="nav" class="hidden space-x-10 md:flex">
+          <Popover class="relative" v-slot="{ open }">
+            <PopoverButton :class="[open ? 'text-gray-900' : 'text-gray-500', 'group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2']">
+              <span>Solutions</span>
+              <ChevronDownIcon :class="[open ? 'text-gray-600' : 'text-gray-400', 'ml-2 h-5 w-5 group-hover:text-gray-500']" aria-hidden="true" />
+            </PopoverButton>
 
-          <!-- Profile dropdown -->
-          <Menu as="div" class="relative ml-3">
-            <div>
-              <MenuButton class="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                <span class="sr-only">Open user menu</span>
-                <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-              </MenuButton>
-            </div>
-            <transition enter-active-class="transition ease-out duration-200" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-              <MenuItems class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <MenuItem v-slot="{ active }">
-                  <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Your Profile</a>
-                </MenuItem>
-                <MenuItem v-slot="{ active }">
-                  <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Settings</a>
-                </MenuItem>
-                <MenuItem v-slot="{ active }">
-                  <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign out</a>
-                </MenuItem>
-              </MenuItems>
+            <transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0 translate-y-1" enter-to-class="opacity-100 translate-y-0" leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100 translate-y-0" leave-to-class="opacity-0 translate-y-1">
+              <PopoverPanel class="absolute z-10 -ml-4 mt-3 w-screen max-w-md transform lg:left-1/2 lg:ml-0 lg:max-w-2xl lg:-translate-x-1/2">
+                <div class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+                  <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2">
+                    <a v-for="item in solutions" :key="item.name" :href="item.href" class="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50">
+                      <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-indigo-600 text-white sm:h-12 sm:w-12">
+                        <component :is="item.icon" class="h-6 w-6" aria-hidden="true" />
+                      </div>
+                      <div class="ml-4">
+                        <p class="text-base font-medium text-gray-900">{{ item.name }}</p>
+                        <p class="mt-1 text-sm text-gray-500">{{ item.description }}</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </PopoverPanel>
             </transition>
-          </Menu>
+          </Popover>
+
+          <a v-for="item in navigation" :key="item.name" :href="item.href" class="text-base font-medium text-gray-500 hover:text-gray-900">{{ item.name }}</a>
+        </PopoverGroup>
+        <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
+          <a href="#" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">Sign in</a>
+          <a href="#" class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-3xl border border-transparent bg-[#FCC252]  px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Sign up</a>
         </div>
       </div>
-    </div>
 
-    <DisclosurePanel class="sm:hidden">
-      <div class="space-y-1 pt-2 pb-4">
-        <!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" -->
-        <DisclosureButton as="a" href="#" class="block border-l-4 border-indigo-500 bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium text-indigo-700">Dashboard</DisclosureButton>
-        <DisclosureButton as="a" href="#" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Team</DisclosureButton>
-        <DisclosureButton as="a" href="#" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Projects</DisclosureButton>
-        <DisclosureButton as="a" href="#" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Calendar</DisclosureButton>
-      </div>
-    </DisclosurePanel>
-  </Disclosure>
+      <transition enter-active-class="duration-200 ease-out" enter-from-class="opacity-0 scale-95" enter-to-class="opacity-100 scale-100" leave-active-class="duration-100 ease-in" leave-from-class="opacity-100 scale-100" leave-to-class="opacity-0 scale-95">
+        <PopoverPanel focus class="absolute inset-x-0 top-0 z-30 origin-top-right transform p-2 transition md:hidden">
+          <div class="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+            <div class="px-5 pt-5 pb-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
+                </div>
+                <div class="-mr-2">
+                  <PopoverButton class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                    <span class="sr-only">Close menu</span>
+                    <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+                  </PopoverButton>
+                </div>
+              </div>
+              <div class="mt-6">
+                <nav class="grid grid-cols-1 gap-7">
+                  <a v-for="item in solutions" :key="item.name" :href="item.href" class="-m-3 flex items-center rounded-lg p-3 hover:bg-gray-50">
+                    <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-indigo-600 text-white">
+                      <component :is="item.icon" class="h-6 w-6" aria-hidden="true" />
+                    </div>
+                    <div class="ml-4 text-base font-medium text-gray-900">{{ item.name }}</div>
+                  </a>
+                </nav>
+              </div>
+            </div>
+            <div class="py-6 px-5">
+              <div class="grid grid-cols-2 gap-4">
+                <a v-for="item in navigation" :key="item.name" :href="item.href" class="text-base font-medium text-gray-900 hover:text-gray-700">{{ item.name }}</a>
+              </div>
+              <div class="mt-6">
+                <a href="#" class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Sign up</a>
+                <p class="mt-6 text-center text-base font-medium text-gray-500">
+                  Existing customer?
+                  <a href="navbar" class="text-gray-900">Sign in</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </PopoverPanel>
+      </transition>
+    </Popover>
+  </header>
 </template>
 
-
+<script setup>
+  import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from '@headlessui/vue'
+  import {
+    Bars3Icon,
+    ChatBubbleBottomCenterTextIcon,
+    ChatBubbleLeftRightIcon,
+    InboxIcon,
+    QuestionMarkCircleIcon,
+    XMarkIcon,
+  } from '@heroicons/vue/24/outline'
+  import { ChevronDownIcon } from '@heroicons/vue/20/solid'
+  
+  const solutions = [
+    {
+      name: 'Movies gallery',
+      description: 'Discover our playlist',
+      href: '#',
+      icon: icon-eye,
+    },
+    {
+      name: 'Messaging',
+      description: 'Speak directly to your customers in a more meaningful way.',
+      href: '#',
+      icon: ChatBubbleBottomCenterTextIcon,
+    },
+    {
+      name: 'Live Chat',
+      description: "Your customers' data will be safe and secure.",
+      href: '#',
+      icon: ChatBubbleLeftRightIcon,
+    },
+    {
+      name: 'Knowledge Base',
+      description: "Connect with third-party tools that you're already using.",
+      href: '#',
+      icon: QuestionMarkCircleIcon,
+    },
+  ]
+  const navigation = [
+    { name: 'Pricing', href: '#' },
+    { name: 'Partners', href: '#' },
+    { name: 'Company', href: '#' },
+  ]
+  </script>
