@@ -65,7 +65,7 @@ class Managers extends Controller
     
   }
 
-  public function updateCruise($id){
+  public function userUpdate($id){
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       // here we process the form
       // Sanitize POST data
@@ -75,7 +75,7 @@ class Managers extends Controller
       $data['id'] = $id;
       $data['img'] = $_FILES["image"]["name"];
     }
-    if($this->managerModel->updateCruise($data)){
+    if($this->managerModel->userUpdate($data)){
     }
   }
 
@@ -91,7 +91,7 @@ class Managers extends Controller
   {
   }
 
-  public function addPortPage()
+  public function h()
   {
     $data = [
       'title' => 'Add cruises'
@@ -99,7 +99,7 @@ class Managers extends Controller
 
   }
 
-  public function addPort()
+  public function movieDelete()
   {
   }
 public function delete($id){

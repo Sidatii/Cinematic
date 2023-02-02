@@ -54,7 +54,7 @@
             <div class="px-5 pt-5 pb-6">
               <div class="flex items-center justify-between">
                 <div>
-                  <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
+                  <img class="h-8 w-auto" src="../assets/CinNostalgia_logo.svg" alt="Cinostalgia" />
                 </div>
                 <div class="-mr-2">
                   <PopoverButton class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -110,7 +110,7 @@
       name: 'Movies gallery',
       description: 'Discover our playlist',
       href: '#',
-      icon: icon-eye,
+      icon: InboxIcon,
     },
     {
       name: 'Messaging',
