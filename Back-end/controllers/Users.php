@@ -45,21 +45,21 @@ class Users extends Controller
   public function signin()
   {
     header('Access-Control-Allow-Origin: *');
-    header('Content-type: application/json');
+    // header('Content-type: application/json');
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $token = INPUT_POST;
       $row = $this->usersModel->signin($token);
       echo json_encode(INPUT_POST);
-      // if ($row) {
-      //   echo json_encode($row);
-      //   die();
-      // }else{
-      //   $message = [
-      //     'status' => 'User not found, please create an account'
-      //   ];
-      //   echo json_encode($message);
-      //   die();
-      // }
+      if ($row) {
+        echo json_encode($row);
+        die();
+      }else{
+        $message = [
+          'status' => 'User not found, please create an account'
+        ];
+        echo json_encode($message);
+        die();
+      }
     }
   }
 }
