@@ -1,7 +1,7 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
 import navbar from './components/navbar.vue'
-import HomeView from './views/HomeView.vue';
+// import HomeView from './views/HomeView.vue';
 import Foooter from './components/footer.vue';
 
 
@@ -9,7 +9,8 @@ export default {
   name: "sidat",
   components: {
     navbar,
-    HomeView,
+    RouterView,
+    RouterLink,
     Foooter
   },
   data() {
@@ -23,8 +24,8 @@ export default {
 
 <template>
 <navbar />
-<HomeView />
+<RouterView/>
+<RouterLink/>
 <Foooter/>
-  
 </template>
 
