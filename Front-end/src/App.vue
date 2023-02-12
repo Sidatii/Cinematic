@@ -6,7 +6,7 @@ import Foooter from './components/footer.vue';
 
 
 export default {
-  name: "sidat",
+  name: "Cinostalgia",
   components: {
     navbar,
     RouterView,
@@ -15,7 +15,7 @@ export default {
   },
   data() {
     return {
-      title: "This is my first vue app",
+      title: "",
     };
   },
 };

@@ -8,4 +8,5 @@ class Movies extends Controller
   {
     $this->moviesModel = $this->model('Manager');
   }
+
 }
