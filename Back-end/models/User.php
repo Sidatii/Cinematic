@@ -14,7 +14,7 @@ class User{
 
         // Bind values
         // $data['token'] = password_hash($data['token'], PASSWORD_DEFAULT);
-        $this->db->bind(':token', $data['token']);
+        $this->db->bind(':token', $data->token);
         $this->db->bind(':firstName', $data->firstName);
         $this->db->bind(':lastName', $data->lastName);
         $this->db->bind(':email', $data->email);
@@ -35,7 +35,7 @@ class User{
         // $hashed_token = password_hash($token, PASSWORD_DEFAULT);
         $this->db->bind(':token', $token->token);
         $row = $this->db->single();
-        if(!empty($row)){
+        if($this->db->rowCount() > 0){
                 return $row;
             } else{
                 return false;
