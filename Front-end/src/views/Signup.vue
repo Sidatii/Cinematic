@@ -70,36 +70,6 @@
               </p>
             </div>
             <div class="mb-4 md:flex md:justify-between">
-              <div class="mb-4 md:mr-2 md:mb-0">
-                <label
-                  class="block mb-2 text-sm font-bold text-gray-700"
-                  for="password"
-                >
-                  Password
-                </label>
-                <input
-                  class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  v-model="password"
-                  type="password"
-                  placeholder="******************"
-                />
-                <p class="text-xs italic text-red-500"></p>
-              </div>
-              <div class="md:ml-2">
-                <label
-                  class="block mb-2 text-sm font-bold text-gray-700"
-                  for="c_password"
-                >
-                  Confirm Password
-                </label>
-                <input
-                  class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  v-model="confirm_password"
-                  type="password"
-                  placeholder="******************"
-                />
-                <p class="text-xs italic text-red-500"></p>
-              </div>
             </div>
             <div class="mb-6 text-center">
               <button
@@ -142,31 +112,18 @@ export default {
         return {
             firstName : '',
             lastName : '',
-            email: '',
-            password: '',
-            confirm_password: ''
+            email: ''
         };
     },
     methods: {
-        signUp(){
-            const data = {
+        async signUp(){
+
+           const response = await axios.post('Users/signup', {
                 firstName: this.firstName,
                 lastName: this.lastName,
-                email: this.email,
-                password: this.password,
-                confirm_password: this.confirm_password
-            };
-
-            axios.post('http://localhost/cinematic/Users/signup', data)
-            .then(
-                res => {
-                    console.log(res)
-                }
-            ).catch(
-                err => {
-                    console.log(err)
-                }
-            )
+                email: this.email
+            })
+            console.log(response);
         }
     }
 }

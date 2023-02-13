@@ -8,14 +8,16 @@ class User{
 
     // Sign up user
     public function signup($data){
+        // echo json_encode($data);
+        // die();
         $this->db->query('INSERT INTO user (token, firstName, lastName, email)VALUES (:token, :firstName, :lastName, :email)');
 
         // Bind values
         // $data['token'] = password_hash($data['token'], PASSWORD_DEFAULT);
         $this->db->bind(':token', $data['token']);
-        $this->db->bind(':firstName', $data['firstName']);
-        $this->db->bind(':lastName', $data['lastName']);
-        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':firstName', $data->firstName);
+        $this->db->bind(':lastName', $data->lastName);
+        $this->db->bind(':email', $data->email);
 
         // Execute
         if($this->db->execute()){
@@ -28,17 +30,16 @@ class User{
 
     // Login user
     public function signin($token){
-        $this->db->query('SELECT * FROM user WHERE token = :token');
+        $this->db->query('SELECT * FROM user WHERE token LIKE :token');
 
-        return $token;
         // $hashed_token = password_hash($token, PASSWORD_DEFAULT);
-        // $this->db->bind(':token', $token);
-        // $row = $this->db->single();
-        // if($this->db->rowCount() > 0){
-        //     return $row;
-        // } else{
-        //     return false;
-        // }
+        $this->db->bind(':token', $token->token);
+        $row = $this->db->single();
+        if(!empty($row)){
+                return $row;
+            } else{
+                return false;
+        }
     }
 
     // Find user by email

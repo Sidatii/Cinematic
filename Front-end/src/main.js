@@ -6,6 +6,7 @@ import router from './router'
 
 import "./components/index.css"
 import './assets/tailwind.css'
+import './axios'
 
 const app = createApp(App)
 
