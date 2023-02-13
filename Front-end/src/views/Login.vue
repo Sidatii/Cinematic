@@ -71,7 +71,7 @@ export default {
             const response = await axios.post('Users/signin', {
                 token: this.token
             })
-            console.log(response);
+            console.log(response.data);
         }
     }
 }
