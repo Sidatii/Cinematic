@@ -25,20 +25,21 @@ class Booking
 
     public function insert($data)
     {
-        $this->db->query('INSERT INTO `booking`(`ID_movie`,`token`, `place`) VALUES(:id, :token, :place)');
+        $this->db->query('INSERT INTO `booking`(`ID_movie`, `ID_room`,`ID_user`, `place`) VALUES(:id, :ID_room, :ID_user, :place)');
         $this->db->bind(':id', $data->ID_movie);
-        $this->db->bind(':token', $data->token);
+        $this->db->bind(':ID_room', $data->ID_room);
+        $this->db->bind(':ID_user', $data->ID_user);
         $this->db->bind(':place', $data->place);
         return $this->db->execute();
     }
 
     public function update($data)
     {
-        $this->db->query('UPDATE `booking` SET `ID_movie`= :idm ,`token`= :token,`place`=:place WHERE `ID`=:id');
+        $this->db->query('UPDATE `booking` SET `ID_movie`= :idm ,`ID_user`= :ID_user,`place`=:place WHERE `ID`=:id');
 
         $this->db->bind(':id', $data->ID);
         $this->db->bind(':idm', $data->ID_movie);
-        $this->db->bind(':token', $data->token);
+        $this->db->bind(':ID_user', $data->ID_user);
         $this->db->bind(':place', $data->place);
         return $this->db->execute();
     }
@@ -59,7 +60,7 @@ class Booking
     public function getTicket($id){
         // echo json_encode($id);
         // die();
-        $this->db->query('SELECT * FROM booking b INNER JOIN movie m ON b.ID_movie = m.ID INNER JOIN user u ON b.token = u.token INNER JOIN room r ON b.ID_room = r.ID WHERE b.ID = :id');
+        $this->db->query('SELECT u.firstName, u.lastName, b.ID, b.booked_at, b.place, m.name, m.broadcast_date, m.broadcast_time, r.name  FROM booking b INNER JOIN movie m ON b.ID_movie = m.ID INNER JOIN user u ON b.ID_user = u.ID INNER JOIN room r ON b.ID_room = r.ID WHERE b.ID = :id');
         $this->db->bind(':id', $id);
         return $this->db->single();
     }

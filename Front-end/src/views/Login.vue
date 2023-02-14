@@ -71,7 +71,9 @@ export default {
             const response = await axios.post('Users/signin', {
                 token: this.token
             })
-            console.log(response.data);
+            if(response.data.status == 1){
+              alert(response.data.message)
+            }
         }
     }
 }

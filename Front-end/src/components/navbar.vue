@@ -80,5 +80,7 @@
     { name: 'About', href: '/About' },
     { name: 'Galley', href: '/galley' },
     { name: 'Contact', href: '/contact' },
+    { name: 'book', href: '/book' }
+
   ]
   </script>
