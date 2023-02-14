@@ -1,14 +1,15 @@
 <template>
-
-<div class="container mx-auto sm:px-6 lg:px-8">
+  <div class="container mx-auto sm:px-6 lg:px-8">
     <div>
-        jbcqskjckjsqcks
-        <font-awesome-icon icon="fa-thin fa-chair-office" />
+      <!-- <font-awesome-icon icon="fa-thin fa-chair-office" /> -->
+      <span class="material-symbols-outlined"> event_seat </span>
+      {{ seat }}
+      
+      
     </div>
-</div>
-
+  </div>
 </template>
 
 <script>
-
+import seat from '../assets/seat-icon.svg';
 </script>
