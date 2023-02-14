@@ -21,11 +21,7 @@ class Movie
         $this->db->bind(':release_date', $data->release_date);
         $this->db->bind(':broadcast_date', $data->broadcast_date);
         $this->db->bind(':broadcast_time', $data->broadcast_time);        
-        if($this->db->execute()){
-            return true;
-        }else{
-            return false;
-        }
+        return $this->db->execute();
     }
 
     public function update($data){
@@ -36,22 +32,14 @@ class Movie
         $this->db->bind(':release_date', $data->release_date);
         $this->db->bind(':broadcast_date', $data->broadcast_date);
         $this->db->bind(':broadcast_time', $data->broadcast_time);
-
-        if($this->db->execute()){
-            return true;
-        }else{
-            return false;
-        }
+        return $this->db->execute();
     }
 
     public function delete($id){
         $this->db->query('DELETE FROM movie WHERE ID=:id');
         $this->db->bind('id', $id);
-        if($this->db->execute()){
-            return true;
-        }else{
-            return false;
-        }
+        return $this->db->execute();
+        
     }
 
 }
