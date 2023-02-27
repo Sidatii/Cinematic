@@ -64,26 +64,6 @@ class Bookings extends Controller
       }
     }
 
-  // public function addShipPage()
-  // {
-  //   $data = [
-  //     'title' => 'Add Ship'
-  //   ];
-
-  // }
-
-  // public function addShip()
-  // {
-  // }
-
-  // public function h()
-  // {
-  //   $data = [
-  //     'title' => 'Add cruises'
-  //   ];
-
-  // }
-
 
 
 

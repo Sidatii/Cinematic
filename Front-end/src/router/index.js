@@ -3,7 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import Login from '../views/Login.vue'
 import  Signup from '../views/Signup.vue'
-import Book from '../views/Book.vue';
+import Book from '../views/Book.vue'
+import Gallery from '../views/Gallery.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,6 +38,11 @@ const router = createRouter({
       path: '/book',
       name: 'Book',
       component: Book
+    },
+    {
+      path: '/gallery',
+      name: 'Gallery',
+      component: Gallery
     }
 
   ]
