@@ -125,13 +125,15 @@
   </div>
 </template>
 
-<script setup>
+<script>
+import axios from "axios";
 import {
   Popover,
   PopoverButton,
   PopoverGroup,
   PopoverPanel,
 } from "@headlessui/vue";
+
 import {
   Bars3Icon,
   ChatBubbleBottomCenterTextIcon,
@@ -140,6 +142,7 @@ import {
   QuestionMarkCircleIcon,
   XMarkIcon,
 } from "@heroicons/vue/24/outline";
+
 import { ChevronDownIcon } from "@heroicons/vue/20/solid";
 
 const solutions = [
@@ -174,4 +177,31 @@ const navigation = [
   { name: "Partners", href: "#" },
   { name: "Company", href: "#" },
 ];
+
+export default {
+  name: "Home",
+  components: {
+    Popover,
+    PopoverButton,
+    PopoverGroup,
+    PopoverPanel,
+    Bars3Icon,
+    ChevronDownIcon,
+    XMarkIcon,
+  },
+  data() {
+    return {
+      solutions,
+      navigation,
+      user: null
+    };
+  },
+  async created() {
+    const response = await axios.post("Users/getUser", {
+
+      'token': localStorage.getItem('token')
+    });
+    this.user = response.data;
+  }
+};
 </script>

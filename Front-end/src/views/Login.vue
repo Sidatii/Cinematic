@@ -71,8 +71,9 @@ export default {
             const response = await axios.post('Users/signin', {
                 token: this.token
             })
-            if(response.data.status == 1){
-              alert(response.data.message)
+            if(response.data.status === 1){
+              localStorage.setItem('token', response.data.Token)
+                this.$router.push('/')
             }
         }
     }

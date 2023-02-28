@@ -117,13 +117,13 @@ export default {
     },
     methods: {
         async signUp(){
-
+          const router = RouterLink;
            const response = await axios.post('Users/signup', {
                 firstName: this.firstName,
                 lastName: this.lastName,
                 email: this.email
             })
-            console.log(response);
+          this.$router.push('/signin');
         }
     }
 }

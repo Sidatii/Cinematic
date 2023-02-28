@@ -58,5 +58,18 @@ class User{
         }
     }
 
+    public function getUser($token){
+        $this->db->query('SELECT * FROM user WHERE token LIKE :token');
+
+        // $hashed_token = password_hash($token, PASSWORD_DEFAULT);
+        $this->db->bind(':token', $token->token);
+        $row = $this->db->single();
+        if($this->db->rowCount() > 0){
+                return $row;
+            } else{
+                return false;
+        }
+    }
+
         
 }

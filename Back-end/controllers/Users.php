@@ -22,6 +22,7 @@ class Users extends Controller
       $data = json_decode(file_get_contents("php://input"));
       // $token = $this->getToken($data);
       $token = $this->getToken($data);
+
       $data->token = json_decode($token);
 
       if ($this->usersModel->signup($data)) {
@@ -39,11 +40,11 @@ class Users extends Controller
         die();
       }
     } else {
-      $respnse = [
+      $response = [
         'StatusCode' => '404',
         'Status' => 'Not Found'
       ];
-      echo json_encode($respnse);
+      echo json_encode($response);
     }
   }
 
@@ -52,20 +53,15 @@ class Users extends Controller
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $token = json_decode(file_get_contents("php://input"));
       $row = $this->usersModel->signin($token);
-      // echo json_encode(INPUT_POST);
-      if ($row != false) {
-        $ID = $row->ID;
-        $firstName = $row->firstName;
-        $lastName = $row->lastName;
-        $email = $row->email;
-
+      if ($row) {
         $response = [
           'status' => 1,
-          'message' => 'Loged in successfully',
-          'ID' => $ID,
-          'firstName' => $firstName,
-          'lastName' => $lastName,
-          'email' => $email
+          'message' => 'Logged in successfully',
+          'ID' => $row->ID,
+          'firstName' => $row->firstName,
+          'lastName' => $row->lastName,
+          'email' => $row->email,
+          'Token' => $row->token
         ];
         echo json_encode($response);
         die();
@@ -74,8 +70,8 @@ class Users extends Controller
           'status' => 0,
           'message' => 'Invalid credentials, please enter the correct token'
         ]);
-        die();
       }
+        die();
     }
   }
 
@@ -85,5 +81,11 @@ class Users extends Controller
     $key = 'vDoWNVvoLBuil_L6v3v';
     $jwt = JWT::encode(array($data), $key, 'HS256');
     return json_encode($jwt);
+  }
+
+  public function getUser(){
+    $token = json_decode(file_get_contents("php://input"));
+    echo json_encode($this->usersModel->getUser($token));
+    die();
   }
 }
