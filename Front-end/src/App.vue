@@ -1,30 +1,39 @@
 <script>
-import { RouterLink, RouterView } from 'vue-router'
+import {RouterLink, RouterView} from 'vue-router'
 import navbar from './components/navbar.vue'
-import Footer from './components/footer.vue';
+// import footer from './components/footer.vue';
+import axios from "axios";
 
 
 export default {
   name: "Cinostalgia",
   components: {
     navbar,
-    RouterView,
     RouterLink,
-    Footer
+    RouterView,
+    // footer
   },
   data() {
     return {
-      title: "",
+      user: null,
     };
   },
+    async created() {
+        const response = await axios.post("Users/getUser",
+            {
+              'token': localStorage.getItem('token')
+            });
+
+        this.user = response.data;
+    },
 };
 
 </script>
 
 <template>
-<navbar/>
-<RouterView/>
-<RouterLink/>
-<Footer/>
+  <navbar :user="user"/>
+  <RouterView/>
+  <RouterLink/>
+<!--  <footer/>-->
 </template>
 

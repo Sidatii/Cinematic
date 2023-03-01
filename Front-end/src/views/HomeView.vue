@@ -50,7 +50,7 @@
                       >Film gallery</a
                     >
                     <a
-                      href="#"
+                      @click="click"
                       class="flex items-center justify-center rounded-md border border-transparent bg-[#FCC252] bg-opacity-80 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-opacity-70 sm:px-8"
                       >Book your spot</a
                     >
@@ -180,6 +180,11 @@ const navigation = [
 
 export default {
   name: "Home",
+  methods: {
+    click() {
+      console.log(this.user)
+    }
+  },
   components: {
     Popover,
     PopoverButton,
@@ -193,15 +198,7 @@ export default {
     return {
       solutions,
       navigation,
-      user: null
     };
   },
-  async created() {
-    const response = await axios.post("Users/getUser", {
-
-      'token': localStorage.getItem('token')
-    });
-    this.user = response.data;
-  }
 };
 </script>
