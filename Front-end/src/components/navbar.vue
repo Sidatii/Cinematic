@@ -5,7 +5,7 @@
         <div class="flex justify-start lg:w-0 lg:flex-1">
           <a href="#">
             <span class="sr-only">Cinostalgia</span>
-            <img class="h-8 w-auto sm:h-10" src="../assets/CinNostalgia_logo.svg" alt="" />
+            <img @click="logUser" class="h-8 w-auto sm:h-10" src="../assets/CinNostalgia_logo.svg" alt="" />
           </a>
         </div>
         <div class="-my-2 -mr-2 md:hidden">
@@ -19,8 +19,8 @@
           <RouterLink v-for="item in navigation" :to="item.href" class="text-base font-medium text-gray-500 hover:text-gray-900">{{ item.name }}</RouterLink>
         </PopoverGroup>
         <div v-if="user" class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-          <RouterLink to="/profile" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-
+          <RouterLink to="/" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+              {{user.firstName}} {{user.lastName}}
             </RouterLink>
           <a href="javascript:void(0)" @click="logout" class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-3xl border border-transparent bg-[#FCC252]  px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">logout</a>
         </div>
@@ -49,7 +49,7 @@
                   </PopoverButton>
                 </div>
               </div>
-              
+
             </div>
             <div class="py-6 px-5">
               <div class="grid grid-cols-2 gap-4">
@@ -81,13 +81,12 @@
     XMarkIcon,
   } from '@heroicons/vue/24/outline'
   import { ChevronDownIcon } from '@heroicons/vue/20/solid'
-  // import {isNull} from "yarn/lib/cli";
 
 
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/About' },
-    { name: 'Galley', href: '/galley' },
+    { name: 'Galley', href: '/gallery' },
     { name: 'Contact', href: '/contact' },
     { name: 'book', href: '/book' }
 
@@ -95,19 +94,19 @@
 
   export default {
     name: 'Navbar',
-    props: {
-      user: {
+    props:{ user: {
         type: Object,
-      }
-    },
+        default: () => ({}),
+      }, }
+    ,
     methods: {
       logout() {
         localStorage.removeItem("token");
-        this.$router.push("/");
+        this.$router.push("");
+      },
+      logUser() {
+        console.log(this.user);
       }
-    },
-    mounted() {
-      console.log(this.user);
     },
     components: {
       Popover,
@@ -128,6 +127,10 @@
 
       }
     },
+    // created() {
+    //     console.log("me first")
+    //     console.log(this.user)
+    // }
 
 
   }

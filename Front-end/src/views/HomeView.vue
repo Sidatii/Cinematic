@@ -200,5 +200,10 @@ export default {
       navigation,
     };
   },
+  beforeMount() {
+    console.log("dd")
+    this.$forceUpdate();
+
+  }
 };
 </script>

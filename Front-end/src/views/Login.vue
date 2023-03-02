@@ -73,9 +73,11 @@ export default {
             })
             if(response.data.status === 1){
               localStorage.setItem('token', response.data.Token)
+
                 this.$router.push('/')
             }
         }
     }
+
 }
 </script>
