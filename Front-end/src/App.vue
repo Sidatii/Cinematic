@@ -74,8 +74,8 @@ export default {
         {
           'token': localStorage.getItem('token')
         });
-    // this.user = {firstName:"data",lastName:"data"}
     this.user = response.data
+    console.log('something')
     // this.parseJwt('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.W3siZmlyc3ROYW1lIjoidmpoaHZqaHNkaGhoaHZ2ZHN2IiwibGFzdE5hbWUiOiJoamJzcXZzaGR2amJjaiIsImVtYWlsIjoiaGpic2NzQGpidmRzYnFqanMudm9tIn1d.9Qpkzd12IlIESXtf7WgTTP0e85Xc7xhuldPU8Dape-A')
   }
 
