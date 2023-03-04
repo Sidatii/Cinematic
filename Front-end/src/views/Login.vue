@@ -75,6 +75,7 @@ export default {
               localStorage.setItem('token', response.data.Token)
 
                 this.$router.push('/')
+
             }
         }
     }
