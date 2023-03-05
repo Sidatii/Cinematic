@@ -1,10 +1,21 @@
+<script setup>
+import { ref } from "vue";
+import {useAuthStore} from "@/stores/Auth";
+
+const authStore = useAuthStore()
+
+const form = ref({
+  token: ""
+})
+</script>
+
 <template>
   <div
     class="w-full my-5 max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8 mx-auto"
   >
     <form
       class="space-y-6"
-      @submit.prevent="logIn"
+      @submit.prevent="authStore.logIn(form)"
     >
       <h5 class="text-xl font-medium text-[#245BA8] text-center">Sign in</h5>
       <div>
@@ -13,10 +24,10 @@
         >
         <input
           type="password"
-          v-model="token"
+          v-model="form.token"
           id="password"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 <?php echo (!empty($data['email_err'])) ? 'border-red-500' : ''; ?>"
-          placeholder="*******************"
+          placeholder="*******************" v-bind="authStore.token"
         />
         <p class="text-xs italic text-red-500">
         </p>
@@ -54,31 +65,3 @@
     </form>
   </div>
 </template>
-
-
-<script>
-import axios from 'axios';
-import { RouterLink } from 'vue-router';
-export default {
-    name: 'login',
-    Data(){
-        return {
-            token: ''
-        };
-    },
-    methods: {
-        async logIn(){
-            const response = await axios.post('Users/signin', {
-                token: this.token
-            })
-            if(response.data.status === 1){
-              localStorage.setItem('token', response.data.Token)
-
-                this.$router.push('/')
-
-            }
-        }
-    }
-
-}
-</script>

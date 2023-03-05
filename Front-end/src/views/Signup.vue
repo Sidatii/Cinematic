@@ -1,3 +1,17 @@
+<script setup>
+
+import { ref } from "vue";
+import {useAuthStore} from "@/stores/Auth";
+
+const authStore = useAuthStore()
+
+const form = ref( {
+  firstName : "",
+  lastName : "",
+  email: ""
+})
+</script>
+
 <template>
   <div class="container mx-auto">
     <div class="flex justify-center px-6 my-12">
@@ -17,7 +31,7 @@
           <h3 class="pt-4 text-2xl text-center">Create an Account!</h3>
           <form
             class="px-8 pt-6 pb-8 mb-4 bg-gray-50 rounded"
-            @submit.prevent="signUp"
+            @submit.prevent="authStore.signUp(form)"
           >
             <div class="mb-4 md:flex md:justify-between">
               <div class="mb-4 md:mr-2 md:mb-0">
@@ -103,28 +117,4 @@
   </div>
 </template>
 
-<script>
-import { RouterLink } from 'vue-router';
-import axios from 'axios'
-export default {
-    name: 'signup',
-    Data(){
-        return {
-            firstName : '',
-            lastName : '',
-            email: ''
-        };
-    },
-    methods: {
-        async signUp(){
-          const router = RouterLink;
-           const response = await axios.post('Users/signup', {
-                firstName: this.firstName,
-                lastName: this.lastName,
-                email: this.email
-            })
-          this.$router.push('/signin');
-        }
-    }
-}
-</script>
+

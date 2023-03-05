@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, markRaw } from 'vue'
 import { createPinia } from 'pinia'
 
 import App from './App.vue'
@@ -20,13 +20,13 @@ import { faChair } from '@fortawesome/free-solid-svg-icons'
 /* add icons to the library */
 library.add(faChair)
 
-
-
-
-
+const pinia = createPinia();
+pinia.use(({store}) => {
+    store.router = markRaw(router);
+})
 
 const app = createApp(App)
-app.use(createPinia())
+app.use(pinia)
 app.use(router)
 app.component('font-awesome-icon', FontAwesomeIcon)
 

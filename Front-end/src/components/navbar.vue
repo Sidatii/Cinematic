@@ -1,3 +1,34 @@
+<script setup>
+import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from '@headlessui/vue'
+import {
+  Bars3Icon,
+  ChatBubbleBottomCenterTextIcon,
+  ChatBubbleLeftRightIcon,
+  InboxIcon,
+  QuestionMarkCircleIcon,
+  XMarkIcon,
+} from '@heroicons/vue/24/outline'
+import { ChevronDownIcon } from '@heroicons/vue/20/solid'
+import { useAuthStore} from "@/stores/Auth";
+import {onMounted} from "vue";
+
+const authStore = useAuthStore();
+
+onMounted (async () => {
+  await authStore.getUser();
+})
+
+const navigation = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/About' },
+  { name: 'Galley', href: '/gallery' },
+  { name: 'Contact', href: '/contact' },
+  { name: 'book', href: '/book' }
+
+]
+
+</script>
+
 <template>
   <header>
     <Popover class="relative bg-white">
@@ -5,7 +36,7 @@
         <div class="flex justify-start lg:w-0 lg:flex-1">
           <a href="#">
             <span class="sr-only">Cinostalgia</span>
-            <img @click="logUser" class="h-8 w-auto sm:h-10" src="../assets/CinNostalgia_logo.svg" alt="" />
+            <img class="h-8 w-auto sm:h-10" src="../assets/CinNostalgia_logo.svg" alt="" />
           </a>
         </div>
         <div class="-my-2 -mr-2 md:hidden">
@@ -18,11 +49,11 @@
 
           <RouterLink v-for="item in navigation" :to="item.href" class="text-base font-medium text-gray-500 hover:text-gray-900">{{ item.name }}</RouterLink>
         </PopoverGroup>
-        <div v-if="user" class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
+        <div v-if="authStore.user" class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
           <RouterLink to="/" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-              {{user.firstName}} {{user.lastName}}
+              {{authStore.user.firstName}} {{authStore.user.lastName}}
             </RouterLink>
-          <a href="javascript:void(0)" @click="logout" class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-3xl border border-transparent bg-[#FCC252]  px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">logout</a>
+          <a href="javascript:void(0)" @click="authStore.logOut" class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-3xl border border-transparent bg-[#FCC252]  px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">logout</a>
         </div>
         <div v-else class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
           <RouterLink to="/signin" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
@@ -70,68 +101,3 @@
   </header>
 </template>
 
-<script>
-  import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from '@headlessui/vue'
-  import {
-    Bars3Icon,
-    ChatBubbleBottomCenterTextIcon,
-    ChatBubbleLeftRightIcon,
-    InboxIcon,
-    QuestionMarkCircleIcon,
-    XMarkIcon,
-  } from '@heroicons/vue/24/outline'
-  import { ChevronDownIcon } from '@heroicons/vue/20/solid'
-
-
-  const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/About' },
-    { name: 'Galley', href: '/gallery' },
-    { name: 'Contact', href: '/contact' },
-    { name: 'book', href: '/book' }
-
-  ]
-
-  export default {
-    name: 'Navbar',
-    props:{ user: {
-        type: Object,
-        default: () => ({}),
-      }, }
-    ,
-    methods: {
-      logout() {
-        localStorage.removeItem("token");
-        this.$router.push("");
-      },
-      logUser() {
-        console.log(this.user);
-      }
-    },
-    components: {
-      Popover,
-      PopoverButton,
-      PopoverGroup,
-      PopoverPanel,
-      Bars3Icon,
-      ChatBubbleBottomCenterTextIcon,
-      ChatBubbleLeftRightIcon,
-      InboxIcon,
-      QuestionMarkCircleIcon,
-      XMarkIcon,
-      ChevronDownIcon,
-    },
-    data() {
-      return {
-        navigation,
-
-      }
-    },
-    // created() {
-    //     console.log("me first")
-    //     console.log(this.user)
-    // }
-
-
-  }
-  </script>
