@@ -4,12 +4,13 @@ import axios from 'axios'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     authUser: null,
-    authToken: null
+    authToken: null,
+    authError: null
   }),
   getters: {
     user: (state) => state.authUser,
-    token: (state) => state.authToken
-
+    token: (state) => state.authToken,
+    errors: (state) => state.authError
   },
   actions: {
     async getUser() {
@@ -20,25 +21,38 @@ export const useAuthStore = defineStore('auth', {
       this.authUser = response.data
     },
     async logIn(form){
+      this.authError = [];
+      try {
       const response = await axios.post('Users/signin', {
         token: form.token
       });
-      if(response.data.status === 1){
-        localStorage.setItem('token', response.data.Token)
-        await this.router.push('/')
+
+        localStorage.setItem('token', form.token);
+        this.authUser = response.data;
+        await this.router.push('/');
+      }catch (error){
+        // You are hereeeee
+        if (error.status === 406)
+        this.authError = error.response.data.error
       }
     },
-    async signUp(form){
-      const response = await axios.post('Users/signup', {
-        firstName: form.firstName,
-        lastName: form.lastName,
-        email: form.email
-      })
-      this.authToken = response.data.Token
-      await this.router.push('/signin')
+    async signUp(form) {
+      this.authError = [];
+      try {
+        const response = await axios.post('Users/signup', {
+          firstName: form.firstName,
+          lastName: form.lastName,
+          email: form.email
+        })
+        this.authToken = response.data.Token
+        await this.router.push('/signin')
+      }catch (error){
+        this.authError = error.response.data.error
+      }
     },
     async logOut(){
       localStorage.clear();
+      this.authUser = null;
       await this.router.push('/signin')
     }
   }

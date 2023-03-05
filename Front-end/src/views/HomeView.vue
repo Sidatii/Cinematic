@@ -1,4 +1,63 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
+<script setup>
+// import axios from "axios";
+// import {
+//   Popover,
+//   PopoverButton,
+//   PopoverGroup,
+//   PopoverPanel,
+// } from "@headlessui/vue";
+
+import {
+  // Bars3Icon,
+  ChatBubbleBottomCenterTextIcon,
+  ChatBubbleLeftRightIcon,
+  InboxIcon,
+  QuestionMarkCircleIcon,
+  // XMarkIcon,
+} from "@heroicons/vue/24/outline";
+import {useAuthStore} from "@/stores/Auth";
+
+const authStore = useAuthStore();
+
+// import { ChevronDownIcon } from "@heroicons/vue/20/solid";
+
+const solutions = [
+  {
+    name: "Inbox",
+    description:
+        "Get a better understanding of where your traffic is coming from.",
+    href: "#",
+    icon: InboxIcon,
+  },
+  {
+    name: "Messaging",
+    description: "Speak directly to your customers in a more meaningful way.",
+    href: "#",
+    icon: ChatBubbleBottomCenterTextIcon,
+  },
+  {
+    name: "Live Chat",
+    description: "Your customers' data will be safe and secure.",
+    href: "#",
+    icon: ChatBubbleLeftRightIcon,
+  },
+  {
+    name: "Knowledge Base",
+    description: "Connect with third-party tools that you're already using.",
+    href: "#",
+    icon: QuestionMarkCircleIcon,
+  },
+];
+const navigation = [
+  { name: "Pricing", href: "#" },
+  { name: "Partners", href: "#" },
+  { name: "Company", href: "#" },
+];
+
+
+</script>
+
+
 <template>
   <div class="bg-white">
     <main>
@@ -125,81 +184,4 @@
   </div>
 </template>
 
-<script>
-import axios from "axios";
-import {
-  Popover,
-  PopoverButton,
-  PopoverGroup,
-  PopoverPanel,
-} from "@headlessui/vue";
 
-import {
-  Bars3Icon,
-  ChatBubbleBottomCenterTextIcon,
-  ChatBubbleLeftRightIcon,
-  InboxIcon,
-  QuestionMarkCircleIcon,
-  XMarkIcon,
-} from "@heroicons/vue/24/outline";
-
-import { ChevronDownIcon } from "@heroicons/vue/20/solid";
-
-const solutions = [
-  {
-    name: "Inbox",
-    description:
-      "Get a better understanding of where your traffic is coming from.",
-    href: "#",
-    icon: InboxIcon,
-  },
-  {
-    name: "Messaging",
-    description: "Speak directly to your customers in a more meaningful way.",
-    href: "#",
-    icon: ChatBubbleBottomCenterTextIcon,
-  },
-  {
-    name: "Live Chat",
-    description: "Your customers' data will be safe and secure.",
-    href: "#",
-    icon: ChatBubbleLeftRightIcon,
-  },
-  {
-    name: "Knowledge Base",
-    description: "Connect with third-party tools that you're already using.",
-    href: "#",
-    icon: QuestionMarkCircleIcon,
-  },
-];
-const navigation = [
-  { name: "Pricing", href: "#" },
-  { name: "Partners", href: "#" },
-  { name: "Company", href: "#" },
-];
-
-export default {
-  name: "Home",
-  methods: {
-    click() {
-      console.log(this.user)
-    }
-  },
-  components: {
-    Popover,
-    PopoverButton,
-    PopoverGroup,
-    PopoverPanel,
-    Bars3Icon,
-    ChevronDownIcon,
-    XMarkIcon,
-  },
-  data() {
-    return {
-      solutions,
-      navigation,
-    };
-  },
-
-};
-</script>

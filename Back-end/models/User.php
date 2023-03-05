@@ -30,7 +30,7 @@ class User{
 
     // Login user
     public function signin($token){
-        $this->db->query('SELECT * FROM user WHERE token LIKE :token');
+        $this->db->query('SELECT * FROM user WHERE token = :token');
 
         // $hashed_token = password_hash($token, PASSWORD_DEFAULT);
         $this->db->bind(':token', $token->token);

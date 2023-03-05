@@ -26,25 +26,28 @@ class Users extends Controller
       $data->token = json_decode($token);
 
       if ($this->usersModel->signup($data)) {
+          http_response_code(200);
         $output = [
-          'Status' => 'You are signed up successfully',
+          'Message' => 'You are signed up successfully',
           'Token' => $data->token
         ];
         echo json_encode($output);
         die();
       } else {
+          http_response_code(422);
         $output = [
-          'Status' => 'Your request has not been processed'
+          'Message' => 'An error occurred while submitting your form'
         ];
         echo json_encode($output);
         die();
       }
     } else {
+        http_response_code(404);
       $response = [
-        'StatusCode' => '404',
         'Status' => 'Not Found'
       ];
       echo json_encode($response);
+      die();
     }
   }
 
@@ -52,26 +55,35 @@ class Users extends Controller
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $token = json_decode(file_get_contents("php://input"));
-      $row = $this->usersModel->signin($token);
-      if ($row) {
-        $response = [
-          'status' => 1,
-          'message' => 'Logged in successfully',
-          'ID' => $row->ID,
-          'firstName' => $row->firstName,
-          'lastName' => $row->lastName,
-          'email' => $row->email,
-          'Token' => $row->token
-        ];
-        echo json_encode($response);
-        die();
-      } else {
-        echo json_encode([
-          'status' => 0,
-          'message' => 'Invalid credentials, please enter the correct token'
-        ]);
+      if (!empty($token)){
+          http_response_code(406);
+          $error = [
+            'Message' =>  'Please fill out your token'
+          ];
+          echo json_encode($error);
+          die();
+      }else {
+          $row = $this->usersModel->signin($token);
+          if ($row) {
+              http_response_code(200);
+              $response = [
+                  'message' => 'Logged in successfully',
+                  'ID' => $row->ID,
+                  'firstName' => $row->firstName,
+                  'lastName' => $row->lastName,
+                  'email' => $row->email,
+              ];
+              echo json_encode($response);
+              die();
+          } else {
+              http_response_code(401);
+              $error = [
+                  'error' => 'Invalid input, please enter the correct token'
+              ];
+              echo json_encode($error);
+              die();
+          }
       }
-        die();
     }
   }
 

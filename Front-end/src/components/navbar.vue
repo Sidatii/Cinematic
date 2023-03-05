@@ -2,13 +2,13 @@
 import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from '@headlessui/vue'
 import {
   Bars3Icon,
-  ChatBubbleBottomCenterTextIcon,
-  ChatBubbleLeftRightIcon,
-  InboxIcon,
-  QuestionMarkCircleIcon,
+  // ChatBubbleBottomCenterTextIcon,
+  // ChatBubbleLeftRightIcon,
+  // InboxIcon,
+  // QuestionMarkCircleIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
-import { ChevronDownIcon } from '@heroicons/vue/20/solid'
+// import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import { useAuthStore} from "@/stores/Auth";
 import {onMounted} from "vue";
 
@@ -49,18 +49,19 @@ const navigation = [
 
           <RouterLink v-for="item in navigation" :to="item.href" class="text-base font-medium text-gray-500 hover:text-gray-900">{{ item.name }}</RouterLink>
         </PopoverGroup>
-        <div v-if="authStore.user" class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-          <RouterLink to="/" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-              {{authStore.user.firstName}} {{authStore.user.lastName}}
-            </RouterLink>
-          <a href="javascript:void(0)" @click="authStore.logOut" class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-3xl border border-transparent bg-[#FCC252]  px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">logout</a>
-        </div>
-        <div v-else class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
+
+        <div v-if="!authStore.user" class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
           <RouterLink to="/signin" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
             Login</RouterLink>
 
           <!-- <a href="#" class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-3xl border border-transparent bg-[#FCC252]  px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Sign up</a> -->
           <RouterLink to="/signup" class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-3xl border border-transparent bg-[#FCC252]  px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">signup</RouterLink>
+        </div>
+        <div v-else-if="authStore.user" class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
+          <RouterLink to="/" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+            {{authStore.user.firstName}} {{authStore.user.lastName}}
+          </RouterLink>
+          <a href="javascript:void(0)" @click="authStore.logOut" class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-3xl border border-transparent bg-[#FCC252]  px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">logout</a>
         </div>
       </div>
 

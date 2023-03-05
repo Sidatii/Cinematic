@@ -27,10 +27,12 @@ const form = ref({
           v-model="form.token"
           id="password"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 <?php echo (!empty($data['email_err'])) ? 'border-red-500' : ''; ?>"
-          placeholder="*******************" v-bind="authStore.token"
+          placeholder="*******************"
         />
-        <p class="text-xs italic text-red-500">
+<!--          :value="authStore.token ? authStore.token : null"-->
+        <p class="text-xs italic text-red-500"> {{authStore.authError}}
         </p>
+
       </div>
       
       <div class="flex items-start">
