@@ -13,6 +13,10 @@
     "@fortawesome/free-regular-svg-icons": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/vue-fontawesome": "^3.0.3",
+    "@headlessui/vue": "^1.7.12",
+    "@tailwindcss/forms": "^0.5.3",
+    "@vue-hero-icons/outline": "^1.7.2",
+    "@vue-hero-icons/solid": "^1.7.2",
     "flowbite": "^1.6.3",
     "font-awesome": "^4.7.0",
     "pinia": "^2.0.28",
@@ -23,6 +27,7 @@
     "vuex": "^4.1.0"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vitejs/plugin-vue-jsx": "^3.0.0",
     "autoprefixer": "^10.4.13",

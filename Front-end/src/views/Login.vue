@@ -30,7 +30,7 @@ const form = ref({
           placeholder="*******************"
         />
 <!--          :value="authStore.token ? authStore.token : null"-->
-        <p class="text-xs italic text-red-500"> {{authStore.authError}}
+        <p class="text-xs italic text-red-500"> {{authStore.authError ? authStore.authError : null}}
         </p>
 
       </div>

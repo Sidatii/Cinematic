@@ -21,7 +21,10 @@ export const useAuthStore = defineStore('auth', {
       this.authUser = response.data
     },
     async logIn(form){
-      this.authError = [];
+      this.authError = null;
+      if(form.token.length <= 15){
+        this.authError = 'Token must be at least 15 character';
+      }else {
       try {
       const response = await axios.post('Users/signin', {
         token: form.token
@@ -31,13 +34,12 @@ export const useAuthStore = defineStore('auth', {
         this.authUser = response.data;
         await this.router.push('/');
       }catch (error){
-        // You are hereeeee
-        if (error.status === 406)
         this.authError = error.response.data.error
+      }
       }
     },
     async signUp(form) {
-      this.authError = [];
+      this.authError = null;
       try {
         const response = await axios.post('Users/signup', {
           firstName: form.firstName,

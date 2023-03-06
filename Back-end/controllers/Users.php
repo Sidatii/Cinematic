@@ -55,10 +55,10 @@ class Users extends Controller
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $token = json_decode(file_get_contents("php://input"));
-      if (!empty($token)){
+      if (empty($token)){
           http_response_code(406);
           $error = [
-            'Message' =>  'Please fill out your token'
+            'error' =>  'Please fill out your token'
           ];
           echo json_encode($error);
           die();
@@ -78,7 +78,7 @@ class Users extends Controller
           } else {
               http_response_code(401);
               $error = [
-                  'error' => 'Invalid input, please enter the correct token'
+                  'error' => 'Invalid input, please enter a valid token'
               ];
               echo json_encode($error);
               die();
