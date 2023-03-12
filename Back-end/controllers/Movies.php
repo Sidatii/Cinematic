@@ -130,4 +130,18 @@ class Movies extends Controller
             }
         }
     }
+
+    public function bookings()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $id = json_decode(file_get_contents("php://input"));
+            $data = $this->moviesModel->getBookings();
+
+            echo json_encode($data);
+            die();
+        } else {
+            echo json_encode('404 ERROR', 404);
+            die();
+        }
+    }
 }
