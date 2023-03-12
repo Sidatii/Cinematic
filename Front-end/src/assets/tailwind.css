@@ -63,7 +63,7 @@
 }
 
 .occupied {
-    background-color: #fff;
+    background-color: #FCC252;
 }
 
 .seat:nth-of-type(2) {
@@ -112,7 +112,7 @@
 }
 
 .screen {
-    background: #fff;
+    background: #FCC252;
     height: 70px;
     width: 70%;
     margin: 15px 0;

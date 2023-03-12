@@ -48,7 +48,7 @@ const mobileFiltersOpen = ref(false)
           <a href="#" class="hover:text-gray-700 dark:hover:text-white ">Animes</a>
         </nav>
 
-        <div class="flex-col gap-1" v-for="movie in galleryStore.movie">
+        <div class="flex-col gap-1" v-for="movie in galleryStore.movies">
           <!--  </div>-->
           <div
               class="flex flex-col justify-end mt-4 bg-black/10 bg-blend-multiply rounded-3xl h-80 overflow-hidden bg-cover bg-center px-7 pt-4 pb-6 text-white"
@@ -61,7 +61,7 @@ const mobileFiltersOpen = ref(false)
                 <div  class="rounded-3xl border border-transparent bg-[#FCC252]  px-2 py-1">AT: {{ movie.time }}</div>
               </div>
               <button class="mt-4 flex space-x-3 items-center">
-                <a  class="px-5 py-2.5 bg-red-600 hover:bg-red-700 rounded-lg text-md bold inline-block">BOOK NOW</a>
+                <router-link :to="{ path: '/book/' + movie.ID }" class="px-5 py-2.5 bg-red-600 hover:bg-red-700 rounded-lg text-md bold inline-block">BOOK NOW</router-link>
               </button>
             </div>
           </div>

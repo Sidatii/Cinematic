@@ -23,7 +23,6 @@ onMounted (async () => {
 const userNav = [
   { name: 'Home', href: '/' },
   { name: 'Galley', href: '/gallery' },
-  { name: 'book', href: '/book' },
   { name: 'About', href: '/About' },
   { name: 'Contact', href: '/contact' }
 

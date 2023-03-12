@@ -99,7 +99,7 @@ class Movies extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id = json_decode(file_get_contents("php://input"));
-            $data = $this->moviesModel->getMovie($id);
+            $data = $this->moviesModel->getMovie($id->id);
 
             echo json_encode($data);
             die();
