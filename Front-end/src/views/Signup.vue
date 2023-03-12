@@ -43,11 +43,11 @@ const form = ref( {
                 </label>
                 <input
                   class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  v-model="firstName"
+                  v-model="form.firstName"
                   type="text"
                   placeholder="First Name"
                 />
-                <p class="text-xs italic text-red-500">
+                <p class="text-xs italic text-red-500">{{authStore.authError ? authStore.authError : null}}
                 </p>
               </div>
               <div class="md:ml-2">
@@ -59,7 +59,7 @@ const form = ref( {
                 </label>
                 <input
                   class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  v-model="lastName"
+                  v-model="form.lastName"
                   type="text"
                   placeholder="Last Name"
                 />
@@ -76,7 +76,7 @@ const form = ref( {
               </label>
               <input
                 class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                v-model="email"
+                v-model="form.email"
                 type="email"
                 placeholder="Email"
               />

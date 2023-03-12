@@ -42,28 +42,54 @@ class Bookings extends Controller
       }
     }
 
-  public function update()
-  {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $data = json_decode(file_get_contents("php://input"));
-      if ($this->bookingModel->update($data)) {
-          $output = [
-            "status" => 1,
-            "message" => 'Your booking has been updated'
-          ];
-          echo json_encode($output);
-          die();
-        } else {
-          $output = [
-            "status" => 0,
-            "message" => 'An error occured while updating your booking, please try again later'
-          ];
-          echo json_encode($output);
-          die();
-        }
+    public function bookings()
+    {
+      if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        $data = $this->bookingModel->bookings();
+        echo json_encode($data);
+        die();
       }
     }
 
+    public function booking($id)
+    {
+      if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        $data = $this->bookingModel->booking($id);
+        echo json_encode($data);
+        die();
+      }
+    }
+
+    public function ticket($id)
+    {
+      if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        $data = $this->bookingModel->ticket($id);
+        echo json_encode($data);
+        die();
+      }
+    }
+
+    public function cancel()
+    {
+      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $data = json_decode(file_get_contents("php://input"));
+        if ($this->bookingModel->cancel($data->id)) {
+            $output = [
+              "status" => 1,
+              "message" => 'Your booking has been cancelled'
+            ];
+            echo json_encode($output);
+            die();
+          } else {
+            $output = [
+              "status" => 0,
+              "message" => 'An error occured while cancelling your booking, please try again later'
+            ];
+            echo json_encode($output);
+            die();
+          }
+        }
+      }
 
 
 

@@ -47,6 +47,7 @@ export const useAuthStore = defineStore('auth', {
           email: form.email
         })
         this.authToken = response.data.Token
+        // prompt("Copy to clipboard: Ctrl+C, Enter", this.authToken);
         await this.router.push('/signin')
       }catch (error){
         this.authError = error.response.data.error
