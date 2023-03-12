@@ -22,10 +22,10 @@ onMounted (async () => {
 
 const userNav = [
   { name: 'Home', href: '/' },
-  { name: 'About', href: '/About' },
   { name: 'Galley', href: '/gallery' },
-  { name: 'Contact', href: '/contact' },
-  { name: 'book', href: '/book' }
+  { name: 'book', href: '/book' },
+  { name: 'About', href: '/About' },
+  { name: 'Contact', href: '/contact' }
 
 ]
 const adminNav = [
@@ -53,7 +53,7 @@ const adminNav = [
           </PopoverButton>
         </div>
         <PopoverGroup v-if="authStore.user" as="nav" class="hidden space-x-10 md:flex">
-          <RouterLink v-if="authStore.user.ID === 0" v-for="item in adminNav" :to="item.href" class="text-base font-medium text-gray-500 hover:text-gray-900">{{ item.name }}</RouterLink>
+          <RouterLink v-if="authStore.user.role === 0" v-for="item in adminNav" :to="item.href" class="text-base font-medium text-gray-500 hover:text-gray-900">{{ item.name }}</RouterLink>
           <RouterLink v-else v-for="item in userNav" :to="item.href" class="text-base font-medium text-gray-500 hover:text-gray-900">{{ item.name }}</RouterLink>
         </PopoverGroup>
         <PopoverGroup v-else  as="nav" class="hidden space-x-10 md:flex">
