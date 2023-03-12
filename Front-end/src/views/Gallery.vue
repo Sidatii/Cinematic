@@ -1,8 +1,7 @@
 <script setup>
 import {useGalleryStore} from "@/stores/Gallery";
 import {ref} from 'vue';
-
-
+// Use gallery store to get movies
 const galleryStore = useGalleryStore();
 import {onMounted} from "vue";
 
