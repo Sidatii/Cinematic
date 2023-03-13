@@ -41,4 +41,16 @@ class Booking
         $this->db->query('SELECT * FROM booking ORDER BY ID DESC LIMIT 1');
         return $this->db->single();
     }
+
+    public function booked($id){
+        $this->db->query('SELECT * FROM booking WHERE ID_user = :id');
+        $this->db->bind(':id', $id);
+        return $this->db->resultSet();
+    }
+
+    public function bookedPlaces($id){
+        $this->db->query('SELECT place FROM booking WHERE ID_movie = :ID_movie');
+        $this->db->bind(':ID_movie', $id);
+        return $this->db->resultSet();
+    }
 }

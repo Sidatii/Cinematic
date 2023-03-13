@@ -9,6 +9,7 @@ import {onMounted} from "vue";
 import {useRoute} from "vue-router";
 import router from "@/router";
 import axios from "axios";
+import logger from "@fortawesome/vue-fontawesome/src/logger";
 
 // console.log($route.params.id)
 
@@ -24,13 +25,48 @@ let $route = useRoute();
 const id = $route.params.id;
 const movie = async (id) => {
   await galleryStore.getMovie(id)
-  await console.log(galleryStore.galMovie)
+  await bookingStore.getPlaces(id)
+
+  // await console.log(bookingStore.places)
+  // await console.log(galleryStore.galMovie)
 }
 movie(id)
 
+
+function isReserved(i) {
+  return !!bookingStore.places.includes(i);
+}
+
+
+function selectSeat(e) {
+  function updateSelectedCount() {
+    const selectedSeats = document.querySelectorAll('.row .seat.selected');
+    const selectedSeatsCount = selectedSeats.length;
+    const seatsIndex = [...selectedSeats].map((seat) => [...seats].indexOf(seat));
+    localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
+    let count = document.getElementById('count');
+    count.innerText = selectedSeatsCount;
+    let total = document.getElementById('total')
+    total.innerText = selectedSeatsCount * ticketPrice;
+  }
+
+  if (
+      !e.target.classList.contains('occupied') &&
+      !e.target.classList.contains('selected')
+  ) {
+    e.target.classList.add('selected');
+    updateSelectedCount();
+  } else if (e.target.classList.contains('selected')) {
+    e.target.classList.remove('selected');
+    updateSelectedCount();
+  }
+}
+
 // onMounted(async (id) => {
-//   await this.movie(id)
-//   console.log(galleryStore.movie)
+//   await galleryStore.getMovie(id)
+//   await bookingStore.getPlaces(id)
+//   // await console.log(bookingStore.places)
+//   // await console.log(galleryStore.galMovie)
 // })
 
 
@@ -75,8 +111,8 @@ movie(id)
           <div class="screen"></div>
           <div class="grid grid-cols-10 place-items-center sm:grid-cols-2 md:grid-cols-10">
             <div v-for="i in 50" class="">
-              <div :id="i" class="seat">
-              </div>
+              <div :id="i" v-if="isReserved(i)" @click="selectSeat(i)" class="seat occupied"></div>
+              <div :id="i" v-else @click="selectSeat()" class="seat "></div>
             </div>
           </div>
 
