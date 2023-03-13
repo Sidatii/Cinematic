@@ -95,16 +95,16 @@ class Movies extends Controller
         }
     }
 
-    public function getMovie()
+    public function getMovie($id)
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $id = json_decode(file_get_contents("php://input"));
-            $data = $this->moviesModel->getMovie($id->id);
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data = $this->moviesModel->getMovie($id);
 
             echo json_encode($data);
             die();
         } else {
-            echo json_encode('404 ERROR', 404);
+            http_response_code(404);
+            echo json_encode('404 ERROR');
             die();
         }
     }
