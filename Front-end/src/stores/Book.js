@@ -7,8 +7,8 @@ export const useBookingStore = defineStore('booking', {
         movieBooking: null,
         moviePlaces: null,
         movieSelectedSeats: [],
-        movieTotalSelected: null,
-        movieTotal: null,
+        movieTotalSelected: 0,
+        movieTotal: 0,
         PlaceSelected: Array(50),
     }),
     getters: {

@@ -7,6 +7,7 @@ const bookingStore = useBookingStore();
 const galleryStore = useGalleryStore();
 import {onMounted} from "vue";
 import {useRoute} from "vue-router";
+import * as context from "postcss";
 
 let $route = useRoute();
 const id = $route.params.id;
@@ -15,6 +16,27 @@ const movie = async (id) => {
   await bookingStore.getPlaces(id)
 }
 movie(id)
+
+
+// watch(() => context.root.$route, () => {
+//   console.log('route changed')
+//   bookingStore.movieSelectedSeats = Array(50);
+//   bookingStore.movieTotalSelected = 0;
+//   bookingStore.movietotal = 0
+// })
+
+watch(
+    $route,
+    () => {
+      console.log('route changed')
+      bookingStore.movieSelectedSeats = [];
+      bookingStore.movieTotalSelected = 0;
+      bookingStore.movietotal = 0
+      bookingStore.PlaceSelected = Array(50)
+    },
+    {deep: true, immediate: true,}
+)
+
 
 
 // onMounted(async (id) => {
@@ -75,7 +97,7 @@ movie(id)
           <p class="text">
             You have selected
             <span id="count">{{ bookingStore.totalSelected ? bookingStore.totalSelected : 0 }}</span> seats for the
-            total price of {{ bookingStore.total ? bookingStore.total : '' }} <span id="total">0</span>
+            total price of <span id="total">{{ bookingStore.total ? bookingStore.total + ' Dh' : '0 Dh' }}</span>
           </p>
         </div>
       </div>
