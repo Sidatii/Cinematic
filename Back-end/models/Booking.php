@@ -51,6 +51,6 @@ class Booking
     public function bookedPlaces($id){
         $this->db->query('SELECT place FROM booking WHERE ID_movie = :ID_movie');
         $this->db->bind(':ID_movie', $id);
-        return $this->db->resultSet();
+        return $this->db->resultSetArray();
     }
 }
