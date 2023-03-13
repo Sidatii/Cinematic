@@ -3,17 +3,17 @@ import axios from 'axios'
 
 export const useBookingStore = defineStore('booking', {
     state: () => ({
-        bookings: null,
-        booking: null,
+        moviesBooking: null,
+        movieBooking: null,
     }),
     getters: {
-        bookings: (state) => state.bookings,
-        booking: (state) => state.booking,
+        bookings: (state) => state.moviesBooking,
+        booking: (state) => state.movieBooking,
     },
     actions: {
         async getBookings() {
             const response = await axios.post("Bookings/bookings");
-            this.bookings = response.data
+            this.moviesBooking = response.data
         },
 
     }

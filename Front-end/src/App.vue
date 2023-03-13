@@ -1,6 +1,6 @@
 <script setup>
 import {RouterLink, RouterView} from 'vue-router'
-// import footer from './components/footer.vue';
+import Foooter from './components/footer.vue';
 import Navbar from "@/components/navbar.vue";
 import {onMounted} from "vue";
 import { useAuthStore} from "@/stores/Auth";
@@ -16,6 +16,7 @@ onMounted (async () => {
 <template>
   <navbar/>
   <RouterView/>
+  <Foooter/>
 </template>
 
 

@@ -7,20 +7,31 @@ const bookingStore = useBookingStore();
 const galleryStore = useGalleryStore();
 import {onMounted} from "vue";
 import {useRoute} from "vue-router";
+import router from "@/router";
+import axios from "axios";
 
 // console.log($route.params.id)
 
 // const id = ref($route.params.id)
 let $route = useRoute();
+// watch(
+//     () => $route.params.id,
+//     (id) => {
+//         console.log(id)
+//         galleryStore.getMovie(id)
+//     }
+// )
 const id = $route.params.id;
+const movie = async (id) => {
+  await galleryStore.getMovie(id)
+  await console.log(galleryStore.galMovie)
+}
+movie(id)
 
-watch(
-    () => id,
-    async () => {
-      await galleryStore.getMovie(id);
-      console.log(galleryStore.movie)
-    }
-)
+// onMounted(async (id) => {
+//   await this.movie(id)
+//   console.log(galleryStore.movie)
+// })
 
 
 </script>
@@ -62,67 +73,13 @@ watch(
 
         <div class="container">
           <div class="screen"></div>
+          <div class="grid grid-cols-10 place-items-center sm:grid-cols-2 md:grid-cols-10">
+            <div v-for="i in 50" class="">
+              <div :id="i" class="seat">
+              </div>
+            </div>
+          </div>
 
-          <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-          </div>
-          <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat occupied"></div>
-            <div class="seat occupied"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-          </div>
-          <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat occupied"></div>
-            <div class="seat occupied"></div>
-          </div>
-          <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-          </div>
-          <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat occupied"></div>
-            <div class="seat occupied"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-          </div>
-          <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat occupied"></div>
-            <div class="seat occupied"></div>
-            <div class="seat occupied"></div>
-            <div class="seat"></div>
-          </div>
 
           <p class="text">
             You have selected <span id="count">0</span> seats for the total price of Rs. <span id="total">0</span>
