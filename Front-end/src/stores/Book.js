@@ -1,6 +1,8 @@
 import {defineStore} from 'pinia'
 import axios from 'axios'
-
+import {useAuthStore} from "@/stores/Auth";
+//
+// const authStore = useAuthStore()
 export const useBookingStore = defineStore('booking', {
     state: () => ({
         moviesBooking: null,
@@ -36,13 +38,28 @@ export const useBookingStore = defineStore('booking', {
             if (this.movieSelectedSeats.includes(id)) {
                 this.movieSelectedSeats.splice(this.selectedSeats.indexOf(id), 1);
                 this.PlaceSelected[id] = '';
-            }else {
+            } else {
                 this.movieSelectedSeats.push(id);
                 this.PlaceSelected[id] = 'selected';
             }
             this.movieTotalSelected = this.selectedSeats.length;
             this.movieTotal = this.totalSelected * 50;
         },
+        async bookSeats(movieId, ID_user) {
+            console.log(ID_user)
+            return true;
+            const seats = this.selectedSeats
+            try {
+                const response = await axios.post(`Bookings/bookSeats/`, [
+                    ID_user,
+                    movieId,
+                    seats,
+                ]);
+                this.movieBooking = response.data;
+            } catch (error) {
+                console.log(error)
+            }
+        }
 
     }
 })

@@ -3,8 +3,8 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   content: [
       './public/**/*.html',
-    './src/**/*.{vue,js,ts,jsx,tsx}',
-    './node_modules/flowbite/**/*.js',
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
+    "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     screens:{

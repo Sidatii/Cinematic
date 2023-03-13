@@ -8,13 +8,12 @@ class Booking
     {
         $this->db = new Database;
     }
-    public function book($data)
+    public function bookSeats($id_movie,$id_user, $place)
     {
-        $this->db->query('INSERT INTO `booking`(`ID_movie`, `ID_room`,`ID_user`, `place`) VALUES(:id, :ID_room, :ID_user, :place)');
-        $this->db->bind(':id', $data->ID_movie);
-        $this->db->bind(':ID_room', $data->ID_room);
-        $this->db->bind(':ID_user', $data->ID_user);
-        $this->db->bind(':place', $data->place);
+        $this->db->query('INSERT INTO `booking`(`ID_movie`, `ID_user`, `place`) VALUES(:id_movie, :id_user, :place)');
+        $this->db->bind(':id_movie', $id_movie);
+        $this->db->bind(':id_user', $id_user);
+        $this->db->bind(':place', $place);
         return $this->db->execute();
     }
 
@@ -27,7 +26,7 @@ class Booking
 
     public function bookings()
     {
-        $this->db->query('SELECT * FROM booking');
+        $this->db->query('');
         return $this->db->resultSet();
     }
 
