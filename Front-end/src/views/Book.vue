@@ -7,9 +7,7 @@ import {ref, watch} from 'vue';
 const bookingStore = useBookingStore();
 const galleryStore = useGalleryStore();
 const authStore = useAuthStore();
-import {onMounted} from "vue";
 import {useRoute} from "vue-router";
-import * as context from "postcss";
 
 let $route = useRoute();
 const id = $route.params.id;

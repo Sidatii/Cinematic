@@ -24,9 +24,10 @@ class Booking
         return $this->db->execute();
     }
 
-    public function bookings()
+    public function bookings($id)
     {
-        $this->db->query('');
+        $this->db->query('SELECT b.ID, b.place, b.ID_user, b.booked_at, m.ID as ID_movie, m.name as movie, m.broadcast_date, m.broadcast_time, r.ID as ID_room, r.name as room FROM booking b INNER JOIN movie m ON b.ID_movie = m.ID INNER JOIN room r ON m.room_id=r.ID WHERE b.ID_user = :id');
+        $this->db->bind(':id', $id);
         return $this->db->resultSet();
     }
 

@@ -23,10 +23,6 @@ export const useBookingStore = defineStore('booking', {
         selected: (state) => state.PlaceSelected,
     },
     actions: {
-        async getBookings() {
-            const response = await axios.post("Bookings/bookings");
-            this.moviesBooking = response.data
-        },
         async getPlaces(movieId) {
             const response = await axios.get(`Bookings/bookedPlaces/${movieId}`);
             this.moviePlaces = response.data
@@ -59,6 +55,11 @@ export const useBookingStore = defineStore('booking', {
             } catch (error) {
                 console.log(error)
             }
+        },
+        async getBookings(id) {
+            console.log('heeeeeeeeeere')
+            const response = await axios.get(`Bookings/bookings/${id}`);
+            this.moviesBooking = response.data
         }
 
     }

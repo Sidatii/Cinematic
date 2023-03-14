@@ -22,9 +22,6 @@ class Bookings extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $data = json_decode(file_get_contents("php://input"));
-//            var_dump($data);
-//            die();
-
             try {
                 foreach ($data->seats as $seat) {
                     $this->bookingModel->bookSeats($data->id_movie, $data->id_user, $seat);

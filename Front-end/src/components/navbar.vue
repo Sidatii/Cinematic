@@ -2,13 +2,8 @@
 import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from '@headlessui/vue'
 import {
   Bars3Icon,
-  // ChatBubbleBottomCenterTextIcon,
-  // ChatBubbleLeftRightIcon,
-  // InboxIcon,
-  // QuestionMarkCircleIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
-// import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import { useAuthStore} from "@/stores/Auth";
 import {useGalleryStore} from "@/stores/Gallery";
 import {onMounted} from "vue";
@@ -23,6 +18,7 @@ onMounted (async () => {
 const userNav = [
   { name: 'Home', href: '/' },
   { name: 'Galley', href: '/gallery' },
+  { name: 'Bookings', href: '/bookings'},
   { name: 'About', href: '/About' },
   { name: 'Contact', href: '/contact' }
 

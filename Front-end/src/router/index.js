@@ -5,8 +5,8 @@ import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import Book from '../views/Book.vue'
 import Gallery from '../views/Gallery.vue'
-import Dashboard from "@/views/Dashboard.vue";
 import Manage from "@/views/Manage.vue";
+import Bookings from "@/views/Bookings.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,9 +44,9 @@ const router = createRouter({
       component: Gallery
     },
     {
-      path: '/dashboard',
-      name: 'Dashboard',
-      component: Dashboard
+      path: '/bookings',
+      name: 'Bookings',
+      component: Bookings
     },
     {
       path: '/manage',
