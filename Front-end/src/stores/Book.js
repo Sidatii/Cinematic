@@ -1,6 +1,8 @@
 import {defineStore} from 'pinia'
 import axios from 'axios'
 import {useAuthStore} from "@/stores/Auth";
+import router from "@/router";
+import Gallery from "@/views/Gallery.vue";
 //
 // const authStore = useAuthStore()
 export const useBookingStore = defineStore('booking', {
@@ -43,7 +45,6 @@ export const useBookingStore = defineStore('booking', {
         },
         async bookSeats(movieId, ID_user) {
             console.log(ID_user)
-            return true;
             const seats = this.selectedSeats
             try {
                 const response = await axios.post(`Bookings/bookSeats/`, [
@@ -52,14 +53,22 @@ export const useBookingStore = defineStore('booking', {
                     seats,
                 ]);
                 this.movieBooking = response.data;
+                await this.router.push('/gallery')
             } catch (error) {
                 console.log(error)
             }
         },
         async getBookings(id) {
-            console.log('heeeeeeeeeere')
             const response = await axios.get(`Bookings/bookings/${id}`);
             this.moviesBooking = response.data
+        },
+        async cancel(id) {
+            try {
+                const response = await axios.delete(`Bookings/cancel/${id}`);
+                this.movieBooking = response.data;
+            } catch (error) {
+                console.log(error)
+            }
         }
 
     }

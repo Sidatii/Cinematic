@@ -94,7 +94,7 @@ function ticket($id)
 public
 function cancel()
 {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
         $data = json_decode(file_get_contents("php://input"));
         if ($this->bookingModel->cancel($data->id)) {
             $output = [
