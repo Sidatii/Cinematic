@@ -1,11 +1,5 @@
 <script setup>
-// import axios from "axios";
-// import {
-//   Popover,
-//   PopoverButton,
-//   PopoverGroup,
-//   PopoverPanel,
-// } from "@headlessui/vue";
+
 
 import {
   // Bars3Icon,
@@ -16,8 +10,14 @@ import {
   // XMarkIcon,
 } from "@heroicons/vue/24/outline";
 import {useAuthStore} from "@/stores/Auth";
+import {onBeforeMount, onMounted} from "vue";
 
 const authStore = useAuthStore();
+
+onMounted(async () => {
+  await authStore.getUser();
+  console.log(await authStore.getTickets(authStore.user.ID))
+});
 
 // import { ChevronDownIcon } from "@heroicons/vue/20/solid";
 

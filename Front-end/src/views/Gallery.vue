@@ -2,7 +2,6 @@
 import {useGalleryStore} from "@/stores/Gallery";
 import {onMounted} from "vue";
 import {ref} from 'vue';
-// Use gallery store to get movies
 const galleryStore = useGalleryStore();
 
 
@@ -20,8 +19,6 @@ onMounted(async () => {
 
   <div
       class="flex min-h-screen  2xl:max-w-screen-2xl 2xl:mx-auto 2xl:border-x-2 2xl:border-gray-200 dark:2xl:border-zinc-700 ">
-
-    <!-- Left Sidebar -->
 
     <main class=" flex-1 py-10  px-5 sm:px-10 ">
       <div class="flex justify-center items-center">
@@ -54,8 +51,7 @@ onMounted(async () => {
         </nav>
 
 
-
-        <div  v-if="galleryStore.movies !== []">
+        <div v-if="galleryStore.movies.length> 0">
           <div class="flex-col gap-1" v-for="movie in galleryStore.movies">
             <!--  </div>-->
             <div
@@ -86,7 +82,7 @@ onMounted(async () => {
             </div>
           </div>
         </div>
-        <div v-else >
+        <div v-else class="-align-center flex justify-center items-center font-bold">
           <p>No movies found</p>
         </div>
       </section>

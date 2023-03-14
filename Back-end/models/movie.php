@@ -44,10 +44,8 @@ class Movie
     }
 
     public function filterMovies($date){
-        var_dump($date);
-        die();
         $this->db->query('SELECT m.ID, m.name, m.release_date, m.image, m.cover, m.broadcast_date, m.broadcast_time, m.added_at, r.ID as id_room, r.name as room FROM movie m INNER JOIN room r ON m.room_id=r.ID WHERE m.broadcast_date = DATE (:date)  ORDER BY m.release_date DESC');
-        $this->db->bind(':date', $date);
+        $this->db->bind(':date', $date[0]);
         return $this->db->resultSet();
     }
 

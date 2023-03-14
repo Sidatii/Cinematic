@@ -1,16 +1,17 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     authUser: null,
     authToken: null,
-    authError: null
+    authError: null,
+    tickets: null
   }),
   getters: {
     user: (state) => state.authUser,
     token: (state) => state.authToken,
-    errors: (state) => state.authError
+    errors: (state) => state.authError,
+    ticket: (state) => state.tickets
   },
   actions: {
     async getUser() {
@@ -18,6 +19,7 @@ export const useAuthStore = defineStore('auth', {
           {
             'token': localStorage.getItem('token')
           });
+      localStorage.setItem('ID', response.data.ID);
       this.authUser = response.data
     },
     async logIn(form){
@@ -57,6 +59,10 @@ export const useAuthStore = defineStore('auth', {
       localStorage.clear();
       this.authUser = null;
       await this.router.push('/signin')
+    },
+    async getTickets (user_id) {
+        const response = await axios.get(`Bookings/bookings/${user_id}`);
+        this.tickets = response.data
     }
   }
 })

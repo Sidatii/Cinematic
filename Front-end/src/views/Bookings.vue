@@ -1,27 +1,27 @@
 <script setup>
 import {useBookingStore} from "@/stores/Book";
 import {useAuthStore} from "@/stores/Auth";
-import {onMounted, watch} from 'vue';
+import {onBeforeMount, onMounted, watch} from 'vue';
 import {useRoute} from "vue-router";
 
 let $route = useRoute();
 
 const bookingStore = useBookingStore();
 const authStore = useAuthStore();
-const user_id = authStore.user.ID
 
-const  ticket = async (user_id) => {
-  await bookingStore.getBookings(user_id)
-}
-if (authStore.user.ID) {
-  ticket(user_id)
-}else {
-  console.log('no user')
-}
-
-// onMounted(async () => {
+// const  ticket = async (user_id) => {
 //   await bookingStore.getBookings(user_id)
-// })
+// }
+// if (authStore.user.ID) {
+//   ticket(user_id)
+// }else {
+//   console.log('no user')
+
+// }
+
+onMounted(async () => {
+  await authStore.getTickets(localStorage.getItem('ID'))
+})
 
 // watch(
 //     $route,
@@ -34,7 +34,7 @@ if (authStore.user.ID) {
 </script>
 
 <template>
-  <div v-for="ticket in bookingStore.moviesBooking" class="flex flex-col sm:flex-row bg-white rounded shadow p-8 max-w-2xl mx-auto w-fit p-8 m-5 gap-4 text-center">
+  <div v-for="ticket in authStore.tickets" class="flex flex-col sm:flex-row bg-white rounded shadow p-8 max-w-2xl mx-auto w-fit p-8 m-5 gap-4 text-center">
     <div class="rounded-lg flex flex-col items-center justify-center gap-4 text-center">
       <button class="bg-[#FCC252] hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" @click="bookingStore.cancel(ticket.ID)">Delete</button>
     </div>

@@ -79,10 +79,6 @@ export const useBookingStore = defineStore('booking', {
 
             }
         },
-        async getBookings(id) {
-            const response = await axios.get(`Bookings/bookings/${id}`);
-            this.moviesBooking = response.data
-        },
         async cancel(id) {
             try {
             // console.log(id)

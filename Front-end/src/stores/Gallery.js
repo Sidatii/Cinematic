@@ -21,7 +21,6 @@ export const useGalleryStore = defineStore('gallery', {
         },
         async filterMovies(date){
             const response = await axios.post(`Movies/filterMovies`, [date])
-
             this.galMovies = response.data
         }
     }

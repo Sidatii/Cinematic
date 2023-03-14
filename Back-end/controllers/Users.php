@@ -20,8 +20,6 @@ class Users extends Controller
 
             $data = json_decode(file_get_contents("php://input"));
             $token = $this->getToken($data);
-            echo json_encode($data);
-            die();
 
             $data->token = json_decode($token);
 
