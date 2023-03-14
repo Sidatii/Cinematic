@@ -33,7 +33,7 @@ watch(
 <template>
   <div v-for="ticket in bookingStore.moviesBooking" class="flex flex-col sm:flex-row bg-white rounded shadow p-8 max-w-2xl mx-auto w-fit p-8 m-5 gap-4 text-center">
     <div class="rounded-lg flex flex-col items-center justify-center gap-4 text-center">
-      <button class="bg-[#FCC252] hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" @click="deleteTicket(ticket.ID)">Delete</button>
+      <button class="bg-[#FCC252] hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" @click="bookingStore.cancel(ticket.ID)">Delete</button>
     </div>
     <div class="rounded-lg flex flex-col items-center gap-4 text-center">
       <img src="src/assets/CinNostalgia_logo.svg" class="w-16 flex justify-center">

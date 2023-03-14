@@ -18,6 +18,10 @@ export const useGalleryStore = defineStore('gallery', {
         async getMovie(id){
             const response = await axios.get(`Movies/getMovie/${id}`)
             this.galMovie = response.data
+        },
+        async filterMovies(date){
+            const response = await axios.get(`Movies/filterMovies/${date}`)
+            this.galMovies = response.data
         }
     }
 })

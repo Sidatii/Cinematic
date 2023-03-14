@@ -3,6 +3,7 @@ import axios from 'axios'
 import {useAuthStore} from "@/stores/Auth";
 import router from "@/router";
 import Gallery from "@/views/Gallery.vue";
+import Swal from "sweetalert2";
 //
 // const authStore = useAuthStore()
 export const useBookingStore = defineStore('booking', {
@@ -44,18 +45,38 @@ export const useBookingStore = defineStore('booking', {
             this.movieTotal = this.totalSelected * 50;
         },
         async bookSeats(movieId, ID_user) {
-            console.log(ID_user)
             const seats = this.selectedSeats
             try {
                 const response = await axios.post(`Bookings/bookSeats/`, [
                     ID_user,
                     movieId,
-                    seats,
+                    seats
                 ]);
+                console.log(response.data)
                 this.movieBooking = response.data;
+
+                await Swal.fire({
+                    title: 'Booking confirmed!',
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                })
                 await this.router.push('/gallery')
             } catch (error) {
                 console.log(error)
+                await Swal.fire({
+                    title: 'There was an error, please try again!',
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                })
+
             }
         },
         async getBookings(id) {
@@ -64,10 +85,35 @@ export const useBookingStore = defineStore('booking', {
         },
         async cancel(id) {
             try {
+            // console.log(id)
+            // return true
                 const response = await axios.delete(`Bookings/cancel/${id}`);
-                this.movieBooking = response.data;
+
+
+                await Swal.fire({
+                    title: response.data.message,
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+
+                    }
+                })
+                await this.router.push('/gallery')
+
             } catch (error) {
                 console.log(error)
+                await Swal.fire({
+                    title: 'There was an error, please try again!',
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                }
+                )
             }
         }
 

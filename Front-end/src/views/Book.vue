@@ -20,14 +20,6 @@ const movie = async (id) => {
 }
 movie(id)
 
-
-// watch(() => context.root.$route, () => {
-//   console.log('route changed')
-//   bookingStore.movieSelectedSeats = Array(50);
-//   bookingStore.movieTotalSelected = 0;
-//   bookingStore.movietotal = 0
-// })
-
 watch(
     $route,
     () => {

@@ -19,6 +19,8 @@ class Booking
 
     public function cancel($id)
     {
+//        var_dump($id);
+//        die();
         $this->db->query('DELETE FROM booking WHERE ID=:id');
         $this->db->bind('id', $id);
         return $this->db->execute();

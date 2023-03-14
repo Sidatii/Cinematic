@@ -22,9 +22,10 @@ class Bookings extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $data = json_decode(file_get_contents("php://input"));
+//            var_dump($data);
             try {
-                foreach ($data->seats as $seat) {
-                    $this->bookingModel->bookSeats($data->id_movie, $data->id_user, $seat);
+                foreach ($data[2] as $seat) {
+                    $this->bookingModel->bookSeats($data[1], $data[0], $seat);
                 }
                 $output = [
                     "status" => 1,
@@ -92,11 +93,10 @@ function ticket($id)
 }
 
 public
-function cancel()
+function cancel($id)
 {
     if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-        $data = json_decode(file_get_contents("php://input"));
-        if ($this->bookingModel->cancel($data->id)) {
+        if ($this->bookingModel->cancel($id)) {
             $output = [
                 "status" => 1,
                 "message" => 'Your booking has been cancelled'
@@ -106,7 +106,7 @@ function cancel()
         } else {
             $output = [
                 "status" => 0,
-                "message" => 'An error occured while cancelling your booking, please try again later'
+                "message" => 'An error occurred while cancelling your booking, please try again later'
             ];
             echo json_encode($output);
             die();

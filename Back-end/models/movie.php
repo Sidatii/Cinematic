@@ -30,7 +30,7 @@ class Movie
     }
 
     public function getMovie($id){
-        $this->db->query('SELECT m.ID, m.name, m.release_date, m.image, m.cover, m.broadcast_date, m.broadcast_time, m.added_at, r.ID as id_room, r.name as room, t.time FROM movie m INNER JOIN room r ON m.room_id=r.ID INNER JOIN timeline t ON m.broadcast_time=t.ID WHERE m.ID=:id');
+        $this->db->query('SELECT m.ID, m.name, m.release_date, m.image, m.cover, m.broadcast_date, m.broadcast_time, m.added_at, r.ID as id_room, r.name as room FROM movie m INNER JOIN room r ON m.room_id=r.ID WHERE m.ID=:id');
         $this->db->bind(':id', $id);
         return $this->db->single();
     }
@@ -41,6 +41,14 @@ class Movie
         $this->db->bind('id', $id);
         return $this->db->execute();
         
+    }
+
+    public function filterMovies($date){
+        var_dump($date);
+        die();
+        $this->db->query('SELECT m.ID, m.name, m.release_date, m.image, m.cover, m.broadcast_date, m.broadcast_time, m.added_at, r.ID as id_room, r.name as room FROM movie m INNER JOIN room r ON m.room_id=r.ID WHERE m.broadcast_date = DATE (:date)  ORDER BY m.release_date DESC');
+        $this->db->bind(':date', $date);
+        return $this->db->resultSet();
     }
 
 }

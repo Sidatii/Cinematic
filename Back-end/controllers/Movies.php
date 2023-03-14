@@ -144,4 +144,17 @@ class Movies extends Controller
             die();
         }
     }
+
+    public function filterMovies()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = json_decode(file_get_contents("php://input"));
+            $data = $this->moviesModel->filterMovies($data->date);
+            echo json_encode($data);
+            die();
+        } else {
+            echo json_encode('404 ERROR', 404);
+            die();
+        }
+    }
 }
