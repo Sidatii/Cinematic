@@ -10,23 +10,26 @@ const bookingStore = useBookingStore();
 const authStore = useAuthStore();
 const user_id = authStore.user.ID
 
-const ticket = (user_id) => {
-  bookingStore.getBookings(user_id)
+const  ticket = async (user_id) => {
+  await bookingStore.getBookings(user_id)
+}
+if (authStore.user.ID) {
+  ticket(user_id)
+}else {
+  console.log('no user')
 }
 
-ticket(user_id)
+// onMounted(async () => {
+//   await bookingStore.getBookings(user_id)
+// })
 
-onMounted(async () => {
-  await bookingStore.getBookings(user_id)
-})
-
-watch(
-    $route,
-    () => {
-      ticket(user_id)
-    },
-    {deep: true, immediate: true,}
-)
+// watch(
+//     $route,
+//     () => {
+//       ticket(user_id)
+//     },
+//     {deep: true, immediate: true,}
+// )
 
 </script>
 

@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const useGalleryStore = defineStore('gallery', {
     state: () => ({
-        galMovies: null,
+        galMovies: [],
         galMovie: null,
     }),
     getters: {
@@ -20,7 +20,8 @@ export const useGalleryStore = defineStore('gallery', {
             this.galMovie = response.data
         },
         async filterMovies(date){
-            const response = await axios.get(`Movies/filterMovies/${date}`)
+            const response = await axios.post(`Movies/filterMovies`, [date])
+
             this.galMovies = response.data
         }
     }

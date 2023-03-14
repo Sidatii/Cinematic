@@ -149,7 +149,7 @@ class Movies extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = json_decode(file_get_contents("php://input"));
-            $data = $this->moviesModel->filterMovies($data->date);
+            $data = $this->moviesModel->filterMovies($data);
             echo json_encode($data);
             die();
         } else {
