@@ -20,8 +20,20 @@ export const useGalleryStore = defineStore('gallery', {
             this.galMovie = response.data
         },
         async filterMovies(date){
+            this.removeSunday()
             const response = await axios.post(`Movies/filterMovies`, [date])
             this.galMovies = response.data
+        },
+        removeSunday(){
+            const picker = document.getElementById('date1');
+            picker.addEventListener('input', function(e){
+                const day = new Date(this.value).getUTCDay();
+                if([6,0].includes(day)){
+                    e.preventDefault();
+                    this.value = '';
+                    alert('Weekends not allowed');
+                }
+            });
         }
     }
 })

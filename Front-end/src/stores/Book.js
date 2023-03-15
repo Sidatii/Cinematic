@@ -66,7 +66,6 @@ export const useBookingStore = defineStore('booking', {
                 })
                 await this.router.push('/gallery')
             } catch (error) {
-                console.log(error)
                 await Swal.fire({
                     title: 'There was an error, please try again!',
                     showClass: {

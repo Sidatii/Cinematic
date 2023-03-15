@@ -22,7 +22,7 @@ onMounted(async () => {
 
     <main class=" flex-1 py-10  px-5 sm:px-10 ">
       <div class="flex justify-center items-center">
-        <input @change="galleryStore.filterMovies(date)" v-model="date" type="date"
+        <input id="date1" @change="galleryStore.filterMovies(date)" v-model="date" type="date"
                class="text-xs ring-1 bg-transparent ring-gray-200 focus:ring-red-300 pl-10 pr-5 text-gray-600 dark:text-white  py-3 rounded-full w-fit outline-none focus:ring-1"
                placeholder="Search ...">
       </div>

@@ -9,27 +9,11 @@ let $route = useRoute();
 const bookingStore = useBookingStore();
 const authStore = useAuthStore();
 
-// const  ticket = async (user_id) => {
-//   await bookingStore.getBookings(user_id)
-// }
-// if (authStore.user.ID) {
-//   ticket(user_id)
-// }else {
-//   console.log('no user')
-
-// }
 
 onMounted(async () => {
   await authStore.getTickets(localStorage.getItem('ID'))
 })
 
-// watch(
-//     $route,
-//     () => {
-//       ticket(user_id)
-//     },
-//     {deep: true, immediate: true,}
-// )
 
 </script>
 

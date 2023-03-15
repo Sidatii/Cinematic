@@ -54,7 +54,7 @@ onMounted(() => {
           {{ galleryStore.movie.broadcast_date }}
         </div>
         <div class="rounded-3xl border border-transparent bg-[#FCC252]  px-2 py-1">AT:
-          {{ galleryStore.movie.time }}
+          {{ galleryStore.movie.broadcast_time }}
         </div>
       </div>
     </div>
@@ -95,9 +95,9 @@ onMounted(() => {
 
 
       <button v-if="authStore.authUser !== null" data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-              class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              class="block text-white bg-[#FCC252] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               type="button">
-        Toggle modal
+        Confirm Booking
       </button>
       <p v-else class="text-red-500">You must be logged in to book a seat</p>
 

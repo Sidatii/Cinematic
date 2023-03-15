@@ -18,15 +18,17 @@ onMounted (async () => {
 const userNav = [
   { name: 'Home', href: '/' },
   { name: 'Galley', href: '/gallery' },
-  { name: 'Bookings', href: '/bookings'},
   { name: 'About', href: '/About' },
   { name: 'Contact', href: '/contact' }
 
 ]
 const adminNav = [
   { name: 'Home', href: '/' },
-  { name: 'Dashboard', href: '/dashboard' },
-  { name: 'Manage', href: '/manage' }
+  { name: 'Gallery', href: '/gallery' },
+  { name: 'Bookings', href: '/bookings'},
+  { name: 'contact', href: '/contact' },
+  { name: 'About', href: '/About' },
+
 ]
 
 </script>
@@ -47,13 +49,13 @@ const adminNav = [
             <Bars3Icon class="h-6 w-6" aria-hidden="true" />
           </PopoverButton>
         </div>
-        <PopoverGroup v-if="authStore.user" as="nav" class="hidden space-x-10 md:flex">
-          <RouterLink v-if="authStore.user.role === 0" v-for="item in adminNav" :to="item.href" class="text-base font-medium text-gray-500 hover:text-gray-900">{{ item.name }}</RouterLink>
+        <PopoverGroup as="nav" class="hidden space-x-10 md:flex">
+          <RouterLink v-if="authStore.user" v-for="item in adminNav" :to="item.href" class="text-base font-medium text-gray-500 hover:text-gray-900">{{ item.name }}</RouterLink>
           <RouterLink v-else v-for="item in userNav" :to="item.href" class="text-base font-medium text-gray-500 hover:text-gray-900">{{ item.name }}</RouterLink>
         </PopoverGroup>
-        <PopoverGroup v-else  as="nav" class="hidden space-x-10 md:flex">
-          <RouterLink v-for="item in userNav" :to="item.href" class="text-base font-medium text-gray-500 hover:text-gray-900">{{ item.name }}</RouterLink>
-        </PopoverGroup>
+<!--        <PopoverGroup  as="nav" class="hidden space-x-10 md:flex">-->
+<!--          <RouterLink v-for="item in userNav" :to="item.href" class="text-base font-medium text-gray-500 hover:text-gray-900">{{ item.name }}</RouterLink>-->
+<!--        </PopoverGroup>-->
 
         <div v-if="!authStore.user" class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
           <RouterLink to="/signin" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">

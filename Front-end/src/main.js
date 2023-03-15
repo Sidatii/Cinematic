@@ -20,6 +20,7 @@ import { faChair } from '@fortawesome/free-solid-svg-icons'
 /* add icons to the library */
 library.add(faChair)
 
+
 const pinia = createPinia();
 pinia.use(({store}) => {
     store.router = markRaw(router);

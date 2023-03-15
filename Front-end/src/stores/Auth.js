@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     authUser: null,
@@ -49,7 +50,7 @@ export const useAuthStore = defineStore('auth', {
           email: form.email
         })
         this.authToken = response.data.Token
-        // prompt("Copy to clipboard: Ctrl+C, Enter", this.authToken);
+        this.copy(this.authToken)
         await this.router.push('/signin')
       }catch (error){
         this.authError = error.response.data.error
@@ -63,6 +64,16 @@ export const useAuthStore = defineStore('auth', {
     async getTickets (user_id) {
         const response = await axios.get(`Bookings/bookings/${user_id}`);
         this.tickets = response.data
+    },
+    copy (link) {
+      navigator.clipboard.writeText(`${link}`).then(r => r);
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Your token has been copied: ' + link,
+        showConfirmButton: false,
+        timer: 5000
+      }).then(r => r);
     }
   }
 })
