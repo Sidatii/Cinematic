@@ -74,6 +74,10 @@ export const useAuthStore = defineStore('auth', {
         showConfirmButton: false,
         timer: 5000
       }).then(r => r);
+    },
+    async deleteTicket (id) {
+      const response = await axios.delete(`Bookings/delete/${id}`);
+      this.tickets = response.data
     }
   }
 })
