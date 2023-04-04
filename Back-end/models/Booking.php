@@ -28,13 +28,13 @@ class Booking
 
     public function bookings($id)
     {
-        $this->db->query('SELECT b.ID, b.place, b.ID_user, b.booked_at, m.ID as ID_movie, m.name as movie, m.broadcast_date, m.broadcast_time, r.ID as ID_room, r.name as room FROM booking b INNER JOIN movie m ON b.ID_movie = m.ID INNER JOIN room r ON m.room_id=r.ID WHERE b.ID_user = :id');
+        $this->db->query('SELECT b.ID, b.place, b.ID_user, b.booked_at, m.ID as ID_movie, m.name as movie, m.broadcast_date, m.broadcast_time, r.ID as ID_room, r.name as room FROM booking b INNER JOIN movie m ON b.ID_movie = m.ID INNER JOIN room r ON m.room_id=r.ID WHERE b.ID_user = :id ORDER BY m.broadcast_date DESC');
         $this->db->bind(':id', $id);
         return $this->db->resultSet();
     }
 
     public function ticket($id){
-        $this->db->query('SELECT u.firstName, u.lastName, b.ID, b.booked_at, b.place, m.name, m.broadcast_date, m.broadcast_time, r.name  FROM booking b INNER JOIN movie m ON b.ID_movie = m.ID INNER JOIN user u ON b.ID_user = u.ID INNER JOIN room r ON b.ID_room = r.ID WHERE b.ID = :id');
+        $this->db->query('SELECT u.firstName, u.lastName, b.ID, b.booked_at, b.place, m.name, m.broadcast_date, m.broadcast_time, r.name  FROM booking b INNER JOIN movie m ON b.ID_movie = m.ID INNER JOIN user u ON b.ID_user = u.ID INNER JOIN room r ON b.ID_room = r.ID WHERE b.ID = :id ORDER BY m.broadcast_date DESC');
         $this->db->bind(':id', $id);
         return $this->db->single();
     }

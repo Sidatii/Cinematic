@@ -1,7 +1,7 @@
 <script setup>
 import {useBookingStore} from "@/stores/Book";
 import {useAuthStore} from "@/stores/Auth";
-import {onBeforeMount, onMounted, watch} from 'vue';
+import {onMounted} from 'vue';
 import {useRoute} from "vue-router";
 
 let $route = useRoute();
@@ -20,10 +20,10 @@ onMounted(async () => {
 <template>
   <div v-for="ticket in authStore.tickets" class="flex flex-col sm:flex-row bg-white rounded shadow p-8 max-w-2xl mx-auto w-fit p-8 m-5 gap-4 text-center">
     <div class="rounded-lg flex flex-col items-center justify-center gap-4 text-center">
-      <button class="bg-[#FCC252] hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" @click="bookingStore.cancel(ticket.ID)">Delete</button>
+      <button v-if="ticket.broadcast_date > new Date().toISOString().slice(0, 10)" class="bg-[#FCC252] hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" @click="bookingStore.cancel(ticket.ID)">Delete</button>
     </div>
     <div class="rounded-lg flex flex-col items-center gap-4 text-center">
-      <img src="src/assets/CinNostalgia_logo.svg" class="w-16 flex justify-center">
+      <img src="src/assets/CinNostalgia_logo.svg" class="w-16 flex justify-center" alt="">
       <p class="text-sm -bold ">Cinostalgia Ticket [{{ticket.ID}}]</p>
     </div>
     <div class="rounded-lg flex flex-col items-center gap-4">

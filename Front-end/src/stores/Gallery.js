@@ -19,7 +19,16 @@ export const useGalleryStore = defineStore('gallery', {
             const response = await axios.get(`Movies/getMovie/${id}`)
             this.galMovie = response.data
         },
+        checkFutureDate(x) {
+            const date = new Date(x);
+            const today = new Date();
+            return date >= today;
+        },
         async filterMovies(date){
+            if (!this.checkFutureDate(date)) {
+                alert('Please select a future date')
+                return
+            }
             this.removeSunday()
             const response = await axios.post(`Movies/filterMovies`, [date])
             this.galMovies = response.data

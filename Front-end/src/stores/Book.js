@@ -1,8 +1,5 @@
 import {defineStore} from 'pinia'
 import axios from 'axios'
-import {useAuthStore} from "@/stores/Auth";
-import router from "@/router";
-import Gallery from "@/views/Gallery.vue";
 import Swal from "sweetalert2";
 //
 // const authStore = useAuthStore()
@@ -80,8 +77,8 @@ export const useBookingStore = defineStore('booking', {
         },
         async cancel(id) {
             try {
-            // console.log(id)
-            // return true
+                // console.log(id)
+                // return true
                 const response = await axios.delete(`Bookings/cancel/${id}`);
 
 
@@ -100,14 +97,14 @@ export const useBookingStore = defineStore('booking', {
             } catch (error) {
                 console.log(error)
                 await Swal.fire({
-                    title: 'There was an error, please try again!',
-                    showClass: {
-                        popup: 'animate__animated animate__fadeInDown'
-                    },
-                    hideClass: {
-                        popup: 'animate__animated animate__fadeOutUp'
+                        title: 'There was an error, please try again!',
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
                     }
-                }
                 )
             }
         }
