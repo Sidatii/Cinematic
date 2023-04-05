@@ -10,7 +10,7 @@ class Movie
     }
 
     public function getMovies(){
-        $this->db->query('SELECT m.ID, m.name, m.release_date, m.image, m.cover, m.broadcast_date, m.broadcast_time, m.added_at, r.ID as id_room, r.name as room FROM movie m INNER JOIN room r ON m.room_id=r.ID ORDER BY m.release_date DESC');
+        $this->db->query('SELECT m.ID, m.name, m.release_date, m.image, m.cover, m.broadcast_date, m.broadcast_time, m.added_at, r.ID as id_room, r.name as room FROM movie m INNER JOIN room r ON m.room_id=r.ID WHERE broadcast_date >= CURRENT_DATE ORDER BY m.release_date DESC');
         return $this->db->resultSet();
     }
 
